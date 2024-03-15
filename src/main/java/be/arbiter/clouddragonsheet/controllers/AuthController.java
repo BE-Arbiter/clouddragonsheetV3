@@ -1,13 +1,13 @@
 package be.arbiter.clouddragonsheet.controllers;
 
+import be.arbiter.clouddragonsheet.configuration.security.jwt.JwtUtils;
+import be.arbiter.clouddragonsheet.configuration.security.services.UserDetailsImpl;
 import be.arbiter.clouddragonsheet.data.dtos.auth.LoginDTO;
 import be.arbiter.clouddragonsheet.data.dtos.auth.UserDto;
 import be.arbiter.clouddragonsheet.data.dtos.auth.UserSignInDTO;
 import be.arbiter.clouddragonsheet.data.entities.User;
 import be.arbiter.clouddragonsheet.data.enums.RoleEnum;
 import be.arbiter.clouddragonsheet.repositories.UserRepository;
-import be.arbiter.clouddragonsheet.configuration.security.jwt.JwtUtils;
-import be.arbiter.clouddragonsheet.configuration.security.services.UserDetailsImpl;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,9 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
