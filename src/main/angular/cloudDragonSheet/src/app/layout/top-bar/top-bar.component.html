@@ -1,5 +1,8 @@
 <div class="flex flex-row justify-content-between align-items-center px-2 h-5rem">
   <div>Left</div>
   <div>center</div>
-  <div>right</div>
+  <div *ngIf="!isAuthenticated">
+    <button pButton type="button" (click)="login()">Do Login</button>
+  </div>
+  <div *ngIf="isAuthenticated">right</div>
 </div>

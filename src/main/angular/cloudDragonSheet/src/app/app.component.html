@@ -1,1 +1,6 @@
+<p-progressBar mode="indeterminate" *ngIf="uiService.loading"></p-progressBar>
+<p-toast></p-toast>
+<p-blockUI *ngIf="uiService.blocked"></p-blockUI>
 <app-unregistered-layout></app-unregistered-layout>
+<app-valdemort-default></app-valdemort-default>
+

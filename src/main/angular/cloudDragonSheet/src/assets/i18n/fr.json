@@ -1,0 +1,7 @@
+{
+  "errors.form.required": "Ce champs est requis",
+  "toast.error": "Erreur",
+  "toast.info": "Information",
+  "toast.success": "Succès",
+  "toast.warn": "Attention"
+}

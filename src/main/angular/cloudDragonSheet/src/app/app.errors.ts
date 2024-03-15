@@ -37,6 +37,7 @@ export class AppErrorHandler implements ErrorHandler {
   }
 
   handleError(error: any): void {
+    debugger;
     if ((error.message || '').includes('ExpressionChangedAfterItHasBeenCheckedError')) {
       console.error(error.message, error);
       return;

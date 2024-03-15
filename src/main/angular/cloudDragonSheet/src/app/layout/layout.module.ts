@@ -4,7 +4,7 @@ import {UnregisteredLayoutComponent} from './unregistered-layout/unregistered-la
 import {RegisteredLayoutComponent} from './registered-layout/registered-layout.component';
 import {TopBarComponent} from './top-bar/top-bar.component';
 import {RouterOutlet} from "@angular/router";
-import {SharedModule} from "primeng/api";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -20,6 +20,7 @@ import {SharedModule} from "primeng/api";
     CommonModule,
     SharedModule,
     RouterOutlet,
+    SharedModule,
   ]
 })
 export class LayoutModule {
