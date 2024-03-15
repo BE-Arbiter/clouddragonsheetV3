@@ -1,7 +1,6 @@
-package be.arbiter.clouddragonsheet.security.services;
+package be.arbiter.clouddragonsheet.configuration.security.services;
 
 import be.arbiter.clouddragonsheet.data.entities.User;
-import be.arbiter.clouddragonsheet.data.enums.RoleEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

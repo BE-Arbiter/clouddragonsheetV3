@@ -1,4 +1,4 @@
-package be.arbiter.clouddragonsheet.security.services;
+package be.arbiter.clouddragonsheet.configuration.security.services;
 
 import be.arbiter.clouddragonsheet.data.entities.User;
 import be.arbiter.clouddragonsheet.repositories.UserRepository;

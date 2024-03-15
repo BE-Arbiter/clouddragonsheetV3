@@ -6,8 +6,9 @@ import be.arbiter.clouddragonsheet.data.dtos.auth.UserSignInDTO;
 import be.arbiter.clouddragonsheet.data.entities.User;
 import be.arbiter.clouddragonsheet.data.enums.RoleEnum;
 import be.arbiter.clouddragonsheet.repositories.UserRepository;
-import be.arbiter.clouddragonsheet.security.jwt.JwtUtils;
-import be.arbiter.clouddragonsheet.security.services.UserDetailsImpl;
+import be.arbiter.clouddragonsheet.configuration.security.jwt.JwtUtils;
+import be.arbiter.clouddragonsheet.configuration.security.services.UserDetailsImpl;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -23,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +42,7 @@ public class AuthController {
 
     @Autowired
     PasswordEncoder encoder;
+
 
     @Autowired
     JwtUtils jwtUtils;
@@ -74,10 +79,10 @@ public class AuthController {
         user.setEmail(newUser.getEmail());
         user.setPassword(encoder.encode(newUser.getPassword()));
         user.setLastName(newUser.getLastName());
-        user.setFirstName(newUser.getLastName());
+        user.setFirstName(newUser.getFirstName());
         user.setActivated(true);
-        user.setActivationCode("notNow");
-        user.setRoles(RoleEnum.ROLE_USER.name());
+        user.setActivationCode(DigestUtils.sha256Hex(newUser.getEmail()));
+        user.setRolesString(RoleEnum.ROLE_USER.name());
         //Auditing
         user.setCrUser(newUser.getUsername());
         user.setCrDate(Calendar.getInstance());

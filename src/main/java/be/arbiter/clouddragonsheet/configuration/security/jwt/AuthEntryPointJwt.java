@@ -1,4 +1,4 @@
-package be.arbiter.clouddragonsheet.security.jwt;
+package be.arbiter.clouddragonsheet.configuration.security.jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

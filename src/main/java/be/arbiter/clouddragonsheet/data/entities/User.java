@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "users")
 @Data
+@EqualsAndHashCode(callSuper=true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class User extends AuditableEntity{
@@ -26,12 +28,20 @@ public class User extends AuditableEntity{
     @JsonIgnore
     private String activationCode;
     @JsonIgnore
-    private String roles;
+    @Column(name="roles")
+    private String rolesString;
+
+    public List<String> getRoles(){
+        if(!StringUtils.hasLength(rolesString)){
+            return new ArrayList<>();
+        }
+        return Arrays.stream(rolesString.split(",")).collect(Collectors.toList());
+    }
 
     public Set<String> getRoleSet(){
-        if(!StringUtils.hasLength(roles)){
+        if(!StringUtils.hasLength(rolesString)){
             return new HashSet<>();
         }
-        return Arrays.stream(roles.split(",")).collect(Collectors.toSet());
+        return Arrays.stream(rolesString.split(",")).collect(Collectors.toSet());
     }
 }

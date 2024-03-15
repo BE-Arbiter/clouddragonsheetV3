@@ -1,6 +1,6 @@
-package be.arbiter.clouddragonsheet.security.jwt;
+package be.arbiter.clouddragonsheet.configuration.security.jwt;
 
-import be.arbiter.clouddragonsheet.security.services.UserDetailsImpl;
+import be.arbiter.clouddragonsheet.configuration.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

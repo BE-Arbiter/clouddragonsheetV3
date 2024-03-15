@@ -1,8 +1,8 @@
-package be.arbiter.clouddragonsheet.security;
+package be.arbiter.clouddragonsheet.configuration.security;
 
-import be.arbiter.clouddragonsheet.security.jwt.AuthEntryPointJwt;
-import be.arbiter.clouddragonsheet.security.jwt.AuthTokenFilter;
-import be.arbiter.clouddragonsheet.security.services.UserDetailsServiceImpl;
+import be.arbiter.clouddragonsheet.configuration.security.jwt.AuthEntryPointJwt;
+import be.arbiter.clouddragonsheet.configuration.security.jwt.AuthTokenFilter;
+import be.arbiter.clouddragonsheet.configuration.security.services.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

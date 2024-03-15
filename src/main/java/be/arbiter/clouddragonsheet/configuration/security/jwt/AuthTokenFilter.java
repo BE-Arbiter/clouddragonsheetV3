@@ -1,6 +1,6 @@
-package be.arbiter.clouddragonsheet.security.jwt;
+package be.arbiter.clouddragonsheet.configuration.security.jwt;
 
-import be.arbiter.clouddragonsheet.security.services.UserDetailsServiceImpl;
+import be.arbiter.clouddragonsheet.configuration.security.services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
