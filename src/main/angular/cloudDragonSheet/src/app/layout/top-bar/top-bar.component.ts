@@ -17,12 +17,12 @@ export class TopBarComponent implements OnInit {
   ) {
   }
   ngOnInit(): void {
-    this.authService.$currentUser.pipe(untilDestroyed(this))
+    this.authService.currentUser$.pipe(untilDestroyed(this))
       .subscribe(value => this.currentUser = value);
   }
 
-  login():void{
-    this.authService.login({username:'test',password:'test'}).subscribe();
+  logout():void{
+    this.authService.logout().subscribe();
   }
 
 

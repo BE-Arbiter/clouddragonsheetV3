@@ -39,9 +39,9 @@ export function HTTPLoaderFactory(http:HttpClient){
   ],
   imports: [...MODULES],
   providers: [
-    {provide: ErrorHandler, useClass: AppErrorHandler},
     MessageService,
-    ConfirmationService
+    ConfirmationService,
+    {provide: ErrorHandler, useClass: AppErrorHandler}
   ],
   bootstrap: [AppComponent]
 })

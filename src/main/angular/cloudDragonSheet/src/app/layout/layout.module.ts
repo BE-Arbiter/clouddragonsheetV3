@@ -3,8 +3,8 @@ import {CommonModule} from '@angular/common';
 import {UnregisteredLayoutComponent} from './unregistered-layout/unregistered-layout.component';
 import {RegisteredLayoutComponent} from './registered-layout/registered-layout.component';
 import {TopBarComponent} from './top-bar/top-bar.component';
-import {RouterOutlet} from "@angular/router";
 import {SharedModule} from "../shared/shared.module";
+import {RouterLink} from "@angular/router";
 
 
 @NgModule({
@@ -16,12 +16,11 @@ import {SharedModule} from "../shared/shared.module";
   exports: [
     UnregisteredLayoutComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterOutlet,
-    SharedModule,
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        SharedModule,
+    ]
 })
 export class LayoutModule {
 }

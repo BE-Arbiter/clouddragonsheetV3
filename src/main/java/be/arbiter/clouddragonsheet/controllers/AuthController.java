@@ -2,6 +2,7 @@ package be.arbiter.clouddragonsheet.controllers;
 
 import be.arbiter.clouddragonsheet.configuration.security.jwt.JwtUtils;
 import be.arbiter.clouddragonsheet.configuration.security.services.UserDetailsImpl;
+import be.arbiter.clouddragonsheet.data.dtos.SimpleAnswerDTO;
 import be.arbiter.clouddragonsheet.data.dtos.auth.LoginDTO;
 import be.arbiter.clouddragonsheet.data.dtos.auth.UserDto;
 import be.arbiter.clouddragonsheet.data.dtos.auth.UserSignInDTO;
@@ -20,6 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
@@ -45,7 +47,7 @@ public class AuthController {
     @GetMapping("/me")
     public ResponseEntity<User> getSelf(HttpServletRequest request){
         String token = jwtUtils.getJwtFromCookies(request);
-        if(token == null){
+        if(!StringUtils.hasLength(token)){
             return ResponseEntity.ok().body(User.guest());
         }
         String username = jwtUtils.getUserNameFromJwtToken(token);
@@ -53,7 +55,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody LoginDTO loginRequest) {
+    public ResponseEntity<UserDto> authenticateUser(@RequestBody LoginDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -68,9 +70,9 @@ public class AuthController {
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new UserDto(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
     }
     @PostMapping("/logout")
-    public ResponseEntity<?> logoutUser() {
+    public ResponseEntity<SimpleAnswerDTO> logoutUser() {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body("You've been signed out!");
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(new SimpleAnswerDTO("You've been signed out!"));
     }
 
     @PostMapping("/createAccount")

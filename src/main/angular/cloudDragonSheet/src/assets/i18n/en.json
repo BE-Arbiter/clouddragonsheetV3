@@ -1,5 +1,13 @@
 {
+    "common.back": "MISSIG_TRANSLATE",
+    "common.login": "MISSIG_TRANSLATE",
+    "common.logout": "MISSIG_TRANSLATE",
+    "common.title": "MISSIG_TRANSLATE",
+    "errors.form.invalid": "MISSIG_TRANSLATE",
     "errors.form.required": "MISSIG_TRANSLATE",
+    "login.password": "MISSIG_TRANSLATE",
+    "login.title": "MISSIG_TRANSLATE",
+    "login.username": "MISSIG_TRANSLATE",
     "toast.error": "MISSIG_TRANSLATE",
     "toast.info": "MISSIG_TRANSLATE",
     "toast.success": "MISSIG_TRANSLATE",

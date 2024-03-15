@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class UnregisteredLayoutComponent {
 
+  public get showTopbar(){
+    const url = window.location.toString();
+    return !url.includes("login");
+  }
 }

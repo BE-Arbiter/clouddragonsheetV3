@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {ApplicationRef, ChangeDetectorRef, Injectable} from "@angular/core";
 import {TranslateService} from "@ngx-translate/core";
 import {MessageService} from "primeng/api";
 
@@ -13,6 +13,7 @@ export class UiService{
   constructor(
     private translate : TranslateService,
     private messageService : MessageService,
+    private ar: ApplicationRef
   ) {
   }
 
@@ -35,16 +36,19 @@ export class UiService{
 
   public notify(type:string,message:string,title:string){
     this.messageService.add({severity:type,summary:title,detail:message});
+    this.ar.tick();
   }
 
   public startProgress(blockUI:boolean = true){
     this._blocked = blockUI;
     this._loading = true;
+    this.ar.tick();
   }
 
   public endProgess(){
     this._blocked = false;
     this._loading = false;
+    this.ar.tick();
   }
 
   public get blocked(){

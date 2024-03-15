@@ -3,6 +3,7 @@ package be.arbiter.clouddragonsheet.configuration.security;
 import be.arbiter.clouddragonsheet.configuration.security.jwt.AuthEntryPointJwt;
 import be.arbiter.clouddragonsheet.configuration.security.jwt.AuthTokenFilter;
 import be.arbiter.clouddragonsheet.configuration.security.services.UserDetailsServiceImpl;
+import jakarta.servlet.DispatcherType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -69,6 +70,7 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth
+                                .dispatcherTypeMatchers(DispatcherType.FORWARD,DispatcherType.ERROR).permitAll()
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .anyRequest().authenticated()
                 )

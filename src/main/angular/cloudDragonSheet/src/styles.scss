@@ -3,3 +3,18 @@
 @import "primeng/resources/primeng.css";
 @import "primeflex/primeflex.css";
 @import "primeicons/primeicons.css";
+
+@import "assets/style/variables";
+
+body{
+  margin: 0;
+  padding : 0;
+}
+
+label{
+  color : #444;
+}
+val-errors{
+  color: #e24c4c;
+  font-size: 0.85rem;
+}

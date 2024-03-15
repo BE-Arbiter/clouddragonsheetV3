@@ -12,7 +12,7 @@ export class AuthService{
   private basepath : string = '/api/auth'
 
   private currentUser : BehaviorSubject<UserFull|null> = new BehaviorSubject<UserFull|null>(null);
-  public $currentUser : Observable<UserFull|null> = this.currentUser.asObservable();
+  public currentUser$ : Observable<UserFull|null> = this.currentUser.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -29,6 +29,20 @@ export class AuthService{
   }
   public login(login : Login){
     return this.http.post<UserFull>(`${this.basepath}/login`,login)
-      .pipe(take(1));
+      .pipe(
+        take(1),
+        tap(() =>{
+          this.updateUserInfo().subscribe();
+        })
+      );
+  }
+  public logout(){
+    return this.http.post(`${this.basepath}/logout`,{})
+      .pipe(
+        take(1),
+        tap(() =>{
+          this.updateUserInfo().subscribe();
+        })
+      );
   }
 }

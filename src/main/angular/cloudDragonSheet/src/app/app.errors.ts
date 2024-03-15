@@ -37,7 +37,6 @@ export class AppErrorHandler implements ErrorHandler {
   }
 
   handleError(error: any): void {
-    debugger;
     if ((error.message || '').includes('ExpressionChangedAfterItHasBeenCheckedError')) {
       console.error(error.message, error);
       return;
@@ -57,10 +56,10 @@ export class AppErrorHandler implements ErrorHandler {
         return;
       }
     }
-    console.error("An error occurred",applicationError);
+    console.error(applicationError);
     //Avertir l'utilisateur
     if(applicationError.code === 401){
-      ui.warn(translate.instant(applicationError.message,translate.instant('error.unauthorized')));
+      ui.warn(translate.instant('errors.unauthorized'));
       ui.endProgess();
       return;
     }
