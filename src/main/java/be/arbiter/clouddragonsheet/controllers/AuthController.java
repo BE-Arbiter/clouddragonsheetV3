@@ -3,10 +3,8 @@ package be.arbiter.clouddragonsheet.controllers;
 import be.arbiter.clouddragonsheet.data.dtos.auth.LoginDTO;
 import be.arbiter.clouddragonsheet.data.dtos.auth.UserDto;
 import be.arbiter.clouddragonsheet.data.dtos.auth.UserSignInDTO;
-import be.arbiter.clouddragonsheet.data.entities.Role;
 import be.arbiter.clouddragonsheet.data.entities.User;
 import be.arbiter.clouddragonsheet.data.enums.RoleEnum;
-import be.arbiter.clouddragonsheet.repositories.RoleRepository;
 import be.arbiter.clouddragonsheet.repositories.UserRepository;
 import be.arbiter.clouddragonsheet.security.jwt.JwtUtils;
 import be.arbiter.clouddragonsheet.security.services.UserDetailsImpl;
@@ -25,9 +23,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashSet;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -38,9 +35,6 @@ public class AuthController {
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -81,23 +75,16 @@ public class AuthController {
         user.setPassword(encoder.encode(newUser.getPassword()));
         user.setLastName(newUser.getLastName());
         user.setFirstName(newUser.getLastName());
+        user.setActivated(true);
+        user.setActivationCode("notNow");
+        user.setRoles(RoleEnum.ROLE_USER.name());
+        //Auditing
+        user.setCrUser(newUser.getUsername());
+        user.setCrDate(Calendar.getInstance());
 
 
-        //Create default role
-        Set<Role> rolesSet = new HashSet<>();
-        if(!roleRepository.existsByName(RoleEnum.ROLE_USER)){
-            Role roleUser = new Role();
-            roleUser.setName(RoleEnum.ROLE_USER);
-            roleRepository.save(roleUser);
-            Role roleAdmin = new Role();
-            roleAdmin.setName(RoleEnum.ROLE_ADMIN);
-            roleRepository.save(roleAdmin);
-        }
-        Role userRole = roleRepository.findByName(RoleEnum.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-        rolesSet.add(userRole);
 
 
-        user.setRoles(rolesSet);
 
         userRepository.save(user);
 

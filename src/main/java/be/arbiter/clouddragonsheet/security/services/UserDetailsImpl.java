@@ -1,6 +1,7 @@
 package be.arbiter.clouddragonsheet.security.services;
 
 import be.arbiter.clouddragonsheet.data.entities.User;
+import be.arbiter.clouddragonsheet.data.enums.RoleEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,20 +31,23 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
 
+    private boolean enabled;
+
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String email, String password,
+    public UserDetailsImpl(Long id, String username, String email, String password,boolean enabled,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.enabled = enabled;
     }
 
     public static UserDetailsImpl build(User user) {
-        List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+        List<GrantedAuthority> authorities = user.getRoleSet().stream()
+                .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
         return new UserDetailsImpl(
@@ -51,6 +55,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getActivated(),
                 authorities);
     }
 
@@ -71,12 +76,12 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
+    public boolean isEnabled(){
+        return enabled;
     }
 
     @Override
-    public boolean isEnabled() {
+    public boolean isCredentialsNonExpired() {
         return true;
     }
 
