@@ -8,6 +8,7 @@ import be.arbiter.clouddragonsheet.data.dtos.auth.UserSignInDTO;
 import be.arbiter.clouddragonsheet.data.entities.User;
 import be.arbiter.clouddragonsheet.data.enums.RoleEnum;
 import be.arbiter.clouddragonsheet.repositories.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,10 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 import java.util.List;
@@ -44,7 +42,17 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/signin")
+    @GetMapping("/me")
+    public ResponseEntity<User> getSelf(HttpServletRequest request){
+        String token = jwtUtils.getJwtFromCookies(request);
+        if(token == null){
+            return ResponseEntity.ok().body(User.guest());
+        }
+        String username = jwtUtils.getUserNameFromJwtToken(token);
+        return ResponseEntity.ok().body(userRepository.findByUsername(username).orElse(User.guest()));
+    }
+
+    @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -59,9 +67,18 @@ public class AuthController {
 
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new UserDto(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
     }
+    @PostMapping("/logout")
+    public ResponseEntity<?> logoutUser() {
+        ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body("You've been signed out!");
+    }
 
-    @PostMapping("/signup")
+    @PostMapping("/createAccount")
     public ResponseEntity<?> registerUser(@RequestBody UserSignInDTO newUser) {
+        newUser.setUsername(newUser.getUsername().toLowerCase());
+        if("guest".equals(newUser.getUsername()) || "liquibase".equals(newUser.getUsername())){
+            return ResponseEntity.badRequest().body("Error: Username is restricted!");
+        }
         if (userRepository.existsByUsername(newUser.getUsername())) {
             return ResponseEntity.badRequest().body("Error: Username is already taken!");
         }
@@ -93,9 +110,4 @@ public class AuthController {
         return ResponseEntity.ok("User registered successfully!");
     }
 
-    @PostMapping("/signout")
-    public ResponseEntity<?> logoutUser() {
-        ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body("You've been signed out!");
-    }
 }

@@ -44,4 +44,10 @@ public class User extends AuditableEntity{
         }
         return Arrays.stream(rolesString.split(",")).collect(Collectors.toSet());
     }
+
+    static public User guest(){
+        User guest = new User();
+        guest.setUsername("guest");
+        return guest;
+    }
 }
