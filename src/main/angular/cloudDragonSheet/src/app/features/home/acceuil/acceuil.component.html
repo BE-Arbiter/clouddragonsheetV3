@@ -1,1 +1,38 @@
-<p>acceuil works!</p>
+<div class="flex flex-column align-items-center">
+  <div class="flex flex-row gap-4 w-12 lg:w-9 xl:w-8 pt-6">
+    <div class="w-6">
+      <h4 class="mb-0 pb-0">{{ 'common.welcome' | translate }}</h4>
+      <h1 class="mt-0 pt-0">{{ 'common.title' | translate }}</h1>
+      <p [innerHTML]="translate.instant('acceuil.explications')">
+      </p>
+      <a [routerLink]='["/auth","subscribe"]'>{{ 'common.notRegistered' | translate }}? {{ 'common.subscribe' | translate }}
+        !</a>
+    </div>
+    <div class="w-6 pics">
+      <div class="pic-1"></div>
+      <div class="pic-2"></div>
+    </div>
+  </div>
+  <div class="flex flex-row justify-content-between gap-2 align-items-center w-12 lg:w-9 xl:w-8 pt-6">
+    <p-card class="w-3">
+      <div class="flex flex-column align-items-center">
+        <h2 class="mt-0 pt-0 align-content-center">Etape 1</h2>
+        <p class="m-0">Inscrivez vous sur l'application</p>
+      </div>
+    </p-card>
+    <div class="w-2 border-bottom-1"></div>
+    <p-card class="w-3">
+      <div class="flex flex-column align-items-center">
+        <h2 class="mt-0 pt-0 align-content-center">Etape 2</h2>
+        <p class="m-0">Encodez vos fiches de personnages</p>
+      </div>
+    </p-card>
+    <div class="w-2 border-bottom-1"></div>
+    <p-card class="w-3">
+      <div class="flex flex-column align-items-center">
+        <h2 class="mt-0 pt-0 align-content-center">Etape 3</h2>
+        <p class="m-0">Utilisez les ou vous voulez</p>
+      </div>
+    </p-card>
+  </div>
+</div>

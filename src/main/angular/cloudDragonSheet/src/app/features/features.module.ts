@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
+import { AdminModule } from './admin/admin.module';
 
 export const FEATURES_ROUTES: Routes = [
   {
@@ -8,8 +9,8 @@ export const FEATURES_ROUTES: Routes = [
     loadChildren: () => import("./home/home.module").then(m => m.HomeModule)
   },
   {
-    path : 'login' ,
-    loadChildren: () => import("./login/login.module").then(m => m.LoginModule)
+    path : 'auth' ,
+    loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule)
   }
 ]
 
@@ -18,7 +19,8 @@ export const FEATURES_ROUTES: Routes = [
   declarations: [
   ],
   imports: [
-    RouterModule.forChild(FEATURES_ROUTES)
+    RouterModule.forChild(FEATURES_ROUTES),
+    AdminModule
   ]
 })
 export class FeaturesModule { }

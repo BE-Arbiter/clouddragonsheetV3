@@ -3,14 +3,15 @@ package be.arbiter.clouddragonsheet.controllers;
 import be.arbiter.clouddragonsheet.configuration.security.jwt.JwtUtils;
 import be.arbiter.clouddragonsheet.configuration.security.services.UserDetailsImpl;
 import be.arbiter.clouddragonsheet.data.dtos.SimpleAnswerDTO;
+import be.arbiter.clouddragonsheet.data.dtos.UserFullDto;
 import be.arbiter.clouddragonsheet.data.dtos.auth.LoginDTO;
-import be.arbiter.clouddragonsheet.data.dtos.auth.UserDto;
-import be.arbiter.clouddragonsheet.data.dtos.auth.UserSignInDTO;
+import be.arbiter.clouddragonsheet.data.dtos.auth.SubscribeDTO;
 import be.arbiter.clouddragonsheet.data.entities.User;
 import be.arbiter.clouddragonsheet.data.enums.RoleEnum;
 import be.arbiter.clouddragonsheet.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -40,22 +41,28 @@ public class AuthController {
     @Autowired
     PasswordEncoder encoder;
 
+    @Autowired
+    ModelMapper mapper;
 
     @Autowired
     JwtUtils jwtUtils;
 
     @GetMapping("/me")
-    public ResponseEntity<User> getSelf(HttpServletRequest request){
+    public ResponseEntity<UserFullDto> getSelf(HttpServletRequest request){
         String token = jwtUtils.getJwtFromCookies(request);
         if(!StringUtils.hasLength(token)){
-            return ResponseEntity.ok().body(User.guest());
+            return ResponseEntity.ok().body(UserFullDto.guest());
         }
         String username = jwtUtils.getUserNameFromJwtToken(token);
-        return ResponseEntity.ok().body(userRepository.findByUsername(username).orElse(User.guest()));
+        User user = userRepository.findByUsername(username).orElse(null);
+        if(user == null){
+            return ResponseEntity.ok().body(UserFullDto.guest());
+        }
+        return ResponseEntity.ok().body(mapper.map(user,UserFullDto.class));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> authenticateUser(@RequestBody LoginDTO loginRequest) {
+    public ResponseEntity<UserFullDto> authenticateUser(@RequestBody LoginDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -67,16 +74,18 @@ public class AuthController {
 
         List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
 
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new UserDto(userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+        User user = userRepository.findByUsername(userDetails.getUsername()).orElse(null);
+
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body( (user!= null)? mapper.map(user,UserFullDto.class): UserFullDto.guest());
     }
     @PostMapping("/logout")
-    public ResponseEntity<SimpleAnswerDTO> logoutUser() {
+    public ResponseEntity<UserFullDto> logoutUser() {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(new SimpleAnswerDTO("You've been signed out!"));
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(UserFullDto.guest());
     }
 
-    @PostMapping("/createAccount")
-    public ResponseEntity<?> registerUser(@RequestBody UserSignInDTO newUser) {
+    @PostMapping("/subscribe")
+    public ResponseEntity<?> registerUser(@RequestBody SubscribeDTO newUser) {
         newUser.setUsername(newUser.getUsername().toLowerCase());
         if("guest".equals(newUser.getUsername()) || "liquibase".equals(newUser.getUsername())){
             return ResponseEntity.badRequest().body("Error: Username is restricted!");
@@ -109,7 +118,7 @@ public class AuthController {
 
         userRepository.save(user);
 
-        return ResponseEntity.ok("User registered successfully!");
+        return ResponseEntity.ok(new SimpleAnswerDTO("User registered successfully!"));
     }
 
 }

@@ -1,0 +1,22 @@
+<form [formGroup]="formGroup">
+  <div class="flex flex-column w-6 gap-3">
+    <h3>{{ "login.title" | translate }}</h3>
+    <div class="flex flex-column">
+      <label>{{ "user.username" | translate }}</label>
+      <input pInputText [formControl]="formGroup.controls.username">
+      <val-errors [control]="formGroup.controls.username"></val-errors>
+    </div>
+    <div class="flex flex-column">
+      <label>{{ "user.password" | translate }}</label>
+      <input pInputText [formControl]="formGroup.controls.password" type="password">
+      <val-errors [control]="formGroup.controls.password"></val-errors>
+    </div>
+    <div class="flex flex-row justify-content-between align-items-center">
+      <a [routerLink]='["/"]'>{{ 'common.back' | translate }}</a>
+
+      <button pButton type="submit" (click)="doLogin()">{{ 'common.login' | translate }}</button>
+
+
+    </div>
+  </div>
+</form>

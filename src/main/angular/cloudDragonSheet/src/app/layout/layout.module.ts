@@ -5,16 +5,19 @@ import {RegisteredLayoutComponent} from './registered-layout/registered-layout.c
 import {TopBarComponent} from './top-bar/top-bar.component';
 import {SharedModule} from "../shared/shared.module";
 import {RouterLink} from "@angular/router";
+import { LeftMenuComponent } from './left-menu/left-menu.component';
 
 
 @NgModule({
   declarations: [
     UnregisteredLayoutComponent,
     RegisteredLayoutComponent,
-    TopBarComponent
+    TopBarComponent,
+    LeftMenuComponent
   ],
   exports: [
-    UnregisteredLayoutComponent
+    UnregisteredLayoutComponent,
+    RegisteredLayoutComponent
   ],
     imports: [
         CommonModule,

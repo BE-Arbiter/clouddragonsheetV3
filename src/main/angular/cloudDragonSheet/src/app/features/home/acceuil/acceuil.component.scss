@@ -1,0 +1,26 @@
+.pics{
+  position: relative;
+  height: 22rem;
+}
+.pic-1{
+  position : absolute;
+  top:0;
+  left:0;
+  border: 1px solid red;
+  background-color : coral;
+  width: 24rem;
+  height : 13.5rem;
+  border-radius : 2em;
+  z-index : 51;
+}
+.pic-2{
+  position: absolute;
+  bottom:0;
+  right:0;
+  border: 1px solid blue;
+  background-color : lightblue;
+  width: 24rem;
+  height : 13.5rem;
+  border-radius : 2em;
+  z-index : 52;
+}

@@ -1,17 +1,17 @@
-import {Component} from '@angular/core';
-import {AuthService} from "../../../core/services/auth.service";
+import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Login, LoginForm} from "../../../core/model/login.model";
+import {AuthService} from "../../../core/services/auth.service";
 import {UiService} from "../../../core/services/ui.service";
-import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrl: './login-form.component.scss'
 })
-export class LoginComponent {
+export class LoginFormComponent {
   public formGroup : FormGroup<LoginForm>
   constructor(
     private authService : AuthService,
@@ -21,8 +21,8 @@ export class LoginComponent {
     private translate : TranslateService
   ) {
     this.formGroup = fb.group<LoginForm>({
-      username: fb.nonNullable.control("",Validators.required),
-      password: fb.nonNullable.control<string>("",Validators.required),
+        username: fb.nonNullable.control("",Validators.required),
+        password: fb.nonNullable.control<string>("",Validators.required),
       }
     )
   }
@@ -35,7 +35,8 @@ export class LoginComponent {
     }
     const login : Login = this.formGroup.value as Login;
     this.authService.login(login).subscribe(value => {
-      this.router.navigate(["/"]);
+      this.router.navigate(["/dashboard"]);
     });
   }
+
 }

@@ -9,6 +9,6 @@ export class UnregisteredLayoutComponent {
 
   public get showTopbar(){
     const url = window.location.toString();
-    return !url.includes("login");
+    return !url.includes("auth/login") && !url.includes("auth/subscribe") && !url.includes("auth/activate");
   }
 }

@@ -6,18 +6,20 @@ import {RouterModule, Routes} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {ValidationErrorsComponent} from "ngx-valdemort";
+import { SubscribeComponent } from './subscribe/subscribe.component';
+import { ActivateComponent } from './activate/activate.component';
 
 
 export const FEATURES_ROUTES: Routes = [
-  {
-    path : '' ,
-    component : LoginComponent
-  }
+  { path : 'login' , component : LoginComponent },
+  { path : 'subscribe' , component : SubscribeComponent},
 ]
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    SubscribeComponent,
+    ActivateComponent
   ],
   imports: [
     CommonModule,
@@ -25,4 +27,4 @@ export const FEATURES_ROUTES: Routes = [
     SharedModule,
   ]
 })
-export class LoginModule { }
+export class AuthModule { }

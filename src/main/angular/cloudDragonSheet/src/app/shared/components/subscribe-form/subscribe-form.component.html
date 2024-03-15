@@ -1,0 +1,41 @@
+<form [formGroup]="formGroup">
+  <div class="flex flex-column w-6 gap-3">
+    <h3>{{ "subscribe.title" | translate }}</h3>
+    <div class="flex flex-column">
+      <label>{{ "user.username" | translate }}</label>
+      <input pInputText [formControl]="formGroup.controls.username">
+      <val-errors [control]="formGroup.controls.username"></val-errors>
+    </div>
+    <div class="flex flex-column">
+      <label>{{ "user.password" | translate }}</label>
+      <input pInputText [formControl]="formGroup.controls.password" type="password">
+      <val-errors [control]="formGroup.controls.password"></val-errors>
+    </div>
+    <div class="flex flex-column">
+      <label>{{ "user.password.confirm" | translate }}</label>
+      <input pInputText [formControl]="formGroup.controls.passwordConfirmation" type="password">
+      <val-errors [control]="formGroup.controls.passwordConfirmation">
+      <ng-template [valError]="'passwordMatch'">{{"errors.form.passwordMatch" | translate}}</ng-template>
+      </val-errors>
+    </div>
+    <div class="flex flex-column">
+      <label>{{ "user.email" | translate }}</label>
+      <input pInputText [formControl]="formGroup.controls.email">
+      <val-errors [control]="formGroup.controls.email"></val-errors>
+    </div>
+    <div class="flex flex-column">
+      <label>{{ "user.firstName" | translate }}</label>
+      <input pInputText [formControl]="formGroup.controls.firstName">
+      <val-errors [control]="formGroup.controls.firstName"></val-errors>
+    </div>
+    <div class="flex flex-column">
+      <label>{{ "user.lastName" | translate }}</label>
+      <input pInputText [formControl]="formGroup.controls.lastName">
+      <val-errors [control]="formGroup.controls.lastName"></val-errors>
+    </div>
+    <div class="flex flex-row justify-content-between align-items-center">
+      <a [routerLink]='["/"]'>{{ 'common.back' | translate }}</a>
+      <button pButton type="submit" (click)="doLogin()">{{ 'common.register' | translate }}</button>
+    </div>
+  </div>
+</form>

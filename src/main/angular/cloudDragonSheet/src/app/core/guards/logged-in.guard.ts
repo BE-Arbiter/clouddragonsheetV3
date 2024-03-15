@@ -25,10 +25,11 @@ export class LoggedInGuard implements CanActivate {
     return this.authService.currentUser$.pipe(
       take(1),
       map(value => {
+        console.log(value);
         if (value != null && value.username !== "guest") {
           return true;
         }
-        return this.router.parseUrl("/access-denied")
+        return this.router.parseUrl("/access-denied");
       })
     );
   }

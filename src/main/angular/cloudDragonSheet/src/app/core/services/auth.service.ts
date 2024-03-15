@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable, take, tap} from "rxjs";
 import {Login} from "../model/login.model";
 import {UserFull} from "../model/user.model";
+import {Subscribe} from "../model/subscribe.model";
 
 
 @Injectable({
@@ -31,18 +32,25 @@ export class AuthService{
     return this.http.post<UserFull>(`${this.basepath}/login`,login)
       .pipe(
         take(1),
-        tap(() =>{
-          this.updateUserInfo().subscribe();
+        tap(value =>{
+          this.currentUser.next(value)
         })
+      );
+  }
+  public subscribe(subscribe : Subscribe){
+    return this.http.post<string>(`${this.basepath}/subscribe`,subscribe)
+      .pipe(
+        take(1)
       );
   }
   public logout(){
-    return this.http.post(`${this.basepath}/logout`,{})
+    return this.http.post<UserFull>(`${this.basepath}/logout`,{})
       .pipe(
         take(1),
-        tap(() =>{
-          this.updateUserInfo().subscribe();
+        tap(value =>{
+          this.currentUser.next(value)
         })
       );
   }
+
 }

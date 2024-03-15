@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserFull} from "../../core/model/user.model";
 import {AuthService} from "../../core/services/auth.service";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {Router} from "@angular/router";
 
 @UntilDestroy()
 @Component({
@@ -13,7 +14,8 @@ export class TopBarComponent implements OnInit {
   public currentUser: UserFull | null = null;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router : Router,
   ) {
   }
   ngOnInit(): void {
@@ -22,7 +24,9 @@ export class TopBarComponent implements OnInit {
   }
 
   logout():void{
-    this.authService.logout().subscribe();
+    this.authService.logout().subscribe(value => {
+      this.router.navigate(["/"])
+    });
   }
 
 

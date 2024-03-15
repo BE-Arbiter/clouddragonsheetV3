@@ -5,16 +5,18 @@
 @import "primeicons/primeicons.css";
 
 @import "assets/style/variables";
+@import "assets/style/button-white";
 
 body{
   margin: 0;
   padding : 0;
+  background-color : $background-color-clear;
 }
 
 label{
   color : #444;
 }
 val-errors{
-  color: #e24c4c;
+  color: $error-color;
   font-size: 0.85rem;
 }
