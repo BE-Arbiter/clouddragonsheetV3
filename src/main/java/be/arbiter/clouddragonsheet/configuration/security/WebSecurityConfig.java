@@ -72,6 +72,7 @@ public class WebSecurityConfig {
                         auth
                                 .dispatcherTypeMatchers(DispatcherType.FORWARD,DispatcherType.ERROR).permitAll()
                                 .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/public/**").permitAll()
                                 .anyRequest().authenticated()
                 )
         ;

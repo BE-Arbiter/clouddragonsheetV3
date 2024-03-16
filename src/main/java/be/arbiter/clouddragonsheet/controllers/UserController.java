@@ -45,7 +45,7 @@ public class UserController {
     }
     @GetMapping("/{id}")
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<UserAdminDto> getUserById(@PathVariable long id) {
+    public ResponseEntity<UserAdminDto> getUserById(@PathVariable Integer id) {
         UserAdminDto userMap = mapper.map(userService.findById(id), UserAdminDto.class);
         userMap.setPassword("");
         return ResponseEntity.ok(userMap);
@@ -53,7 +53,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<?> deleteUser(@PathVariable long id){
+    public ResponseEntity<?> deleteUser(@PathVariable Integer id){
         if(!userService.existById(id)){
             return ResponseEntity.badRequest().body("errors.userNotFound");
         }
@@ -62,7 +62,7 @@ public class UserController {
     }
     @GetMapping("/{id}/username")
     @Secured("ROLE_USER")
-    public ResponseEntity<UserDto> getUsernameById(@PathVariable long id) {
+    public ResponseEntity<UserDto> getUsernameById(@PathVariable Integer id) {
         return ResponseEntity.ok(mapper.map(userService.findById(id), UserDto.class));
     }
     @PutMapping("")
