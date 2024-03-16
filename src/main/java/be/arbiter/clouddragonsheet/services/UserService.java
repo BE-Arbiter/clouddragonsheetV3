@@ -18,7 +18,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User findById(Long id) {
+    public User findById(Integer id) {
         if (id == null) {
             return null;
         }
@@ -28,7 +28,7 @@ public class UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
-    public void delete(long id) {
+    public void delete(Integer id) {
         userRepository.deleteById(id);
     }
 
@@ -38,7 +38,7 @@ public class UserService {
         }
         return userRepository.existsByUsername(username);
     }
-    public Boolean existById(long id) {
+    public Boolean existById(Integer id) {
         return userRepository.existsById(id);
     }
 

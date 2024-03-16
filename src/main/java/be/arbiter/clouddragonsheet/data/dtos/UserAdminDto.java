@@ -14,5 +14,5 @@ public class UserAdminDto extends AuditableDto {
     private String lastName;
     private String firstName;
     private Boolean activated;
-    List<String> roles;
+    private List<String> roles;
 }

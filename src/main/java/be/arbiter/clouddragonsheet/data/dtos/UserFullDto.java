@@ -8,11 +8,11 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class UserFullDto extends BaseDto {
-    String username;
-    String email;
-    String firstName;
-    String lastName;
-    List<String> roles;
+    private String username;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private List<String> roles;
 
 
     static public UserFullDto guest(){
