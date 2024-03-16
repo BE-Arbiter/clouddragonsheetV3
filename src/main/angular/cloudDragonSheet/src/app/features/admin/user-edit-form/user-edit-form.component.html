@@ -1,1 +1,50 @@
-<p>user-edit-form works!</p>
+<div class="flex-column flex gap-3">
+  <div class="flex flex-column">
+    <label>{{ "user.username" | translate }}</label>
+    <input pInputText [formControl]="userForm.controls.username" [readonly]="userForm.value.id">
+    <val-errors [control]="userForm.controls.username"></val-errors>
+  </div>
+  <div class="flex flex-column">
+    <label>{{ "user.password" | translate }}</label>
+    <input pInputText [formControl]="userForm.controls.password" type="password">
+    <val-errors [control]="userForm.controls.password"></val-errors>
+  </div>
+  <div class="flex flex-row gap-3">
+    <div class="flex flex-column w-6">
+      <label>{{ "user.firstName" | translate }}</label>
+      <input pInputText [formControl]="userForm.controls.firstName">
+      <val-errors [control]="userForm.controls.firstName"></val-errors>
+    </div>
+    <div class="flex flex-column w-6">
+      <label>{{ "user.lastName" | translate }}</label>
+      <input pInputText [formControl]="userForm.controls.lastName">
+      <val-errors [control]="userForm.controls.lastName"></val-errors>
+    </div>
+  </div>
+  <div class="flex flex-column">
+    <label>{{ "user.email" | translate }}</label>
+    <input pInputText [formControl]="userForm.controls.email">
+    <val-errors [control]="userForm.controls.email"></val-errors>
+  </div>
+  <div class="flex flex-column">
+    <label>{{ "user.activated" | translate }}</label>
+    <div class="flex flex-row gap-2 w-12">
+      <label class="p-card w-6 h-5rem custom-card-radio">
+        {{"common.yes"|translate}}
+        <input type="radio" [formControl]="userForm.controls.activated" style="display:none" [value]="true">
+      </label>
+      <label class="p-card w-6 h-5rem custom-card-radio">
+        {{"common.no"|translate}}
+        <input type="radio" [formControl]="userForm.controls.activated" style="display:none" [value]="false">
+      </label>
+
+    </div>
+    <val-errors [control]="userForm.controls.email"></val-errors>
+  </div>
+  <div class="flex flex-column">
+    <label>{{ "user.roles" | translate }}</label>
+    <p-multiSelect [options]="roles"  [formControl]="userForm.controls.roles" optionValue="value" optionLabel="label"
+                   display="chip" appendTo="body" styleClass="w-12"></p-multiSelect>
+    <val-errors [control]="userForm.controls.roles"></val-errors>
+  </div>
+</div>

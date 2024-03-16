@@ -16,7 +16,12 @@ export class ApplicationError {
       let httpError: HttpErrorResponse = sourceError as HttpErrorResponse;
       this.code = httpError.status;
       this.status = httpError.statusText;
-      this.message = httpError.message;
+      if(typeof(httpError.error)=='string') {
+        this.message = httpError.error;
+      }
+      else{
+        this.message = httpError.message;
+      }
     } else if (sourceError instanceof Error) {
       let error: Error = sourceError as Error;
       this.code = -1;

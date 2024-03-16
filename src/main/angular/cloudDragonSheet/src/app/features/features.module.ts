@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import { AdminModule } from './admin/admin.module';
+import {AdminModule} from './admin/admin.module';
 
 export const FEATURES_ROUTES: Routes = [
   {
@@ -11,7 +10,11 @@ export const FEATURES_ROUTES: Routes = [
   {
     path : 'auth' ,
     loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule)
-  }
+  },
+  {
+    path : 'admin' ,
+    loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule)
+  },
 ]
 
 

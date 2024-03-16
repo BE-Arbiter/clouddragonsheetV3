@@ -1,0 +1,14 @@
+@import "./variables";
+
+.p-progressbar-indeterminate{
+  border-radius : 0;
+  height: 0.75rem;
+  z-index :1004;
+}
+.p-progressbar-indeterminate .p-progressbar-value{
+  background-color : $primary-color;
+}
+
+.p-blockui-document.p-blockui{
+  z-index : 1003 !important;
+}

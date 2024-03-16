@@ -15,6 +15,11 @@ import {InputTextModule} from "primeng/inputtext";
 import {CardModule} from "primeng/card";
 import {LoginFormComponent} from './components/login-form/login-form.component';
 import { SubscribeFormComponent } from './components/subscribe-form/subscribe-form.component';
+import {TableModule} from "primeng/table";
+import {BadgeModule} from "primeng/badge";
+import {SelectButtonModule} from "primeng/selectbutton";
+import {MultiSelectModule} from "primeng/multiselect";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 
 const DECLARATIONS : any[] = [
@@ -38,6 +43,11 @@ const MODULES : any[] = [
   DialogModule,
   InputTextModule,
   CardModule,
+  TableModule,
+  BadgeModule,
+  SelectButtonModule,
+  MultiSelectModule,
+  ConfirmDialogModule,
 
   ReactiveFormsModule,
   RouterLink,

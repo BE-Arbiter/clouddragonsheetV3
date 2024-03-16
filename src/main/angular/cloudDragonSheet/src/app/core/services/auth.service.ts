@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, take, tap} from "rxjs";
 import {Login} from "../model/login.model";
 import {UserFull} from "../model/user.model";
 import {Subscribe} from "../model/subscribe.model";
+import {SimpleAnswer} from "../model/simple-answer.model";
 
 
 @Injectable({
@@ -38,7 +39,7 @@ export class AuthService{
       );
   }
   public subscribe(subscribe : Subscribe){
-    return this.http.post<string>(`${this.basepath}/subscribe`,subscribe)
+    return this.http.post<SimpleAnswer>(`${this.basepath}/subscribe`,subscribe)
       .pipe(
         take(1)
       );

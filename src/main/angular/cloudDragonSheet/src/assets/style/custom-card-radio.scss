@@ -1,0 +1,16 @@
+@import "./variables";
+
+.custom-card-radio{
+  background-color : $background-color-clear;
+  display : flex;
+  flex-direction : row;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.custom-card-radio:has(input:checked){
+  background-color : $background-color-secondary;
+  font-weight: bolder;
+  color: $background-color-clear;
+}

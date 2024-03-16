@@ -14,6 +14,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +23,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,7 +64,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserFullDto> authenticateUser(@RequestBody LoginDTO loginRequest) {
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -71,8 +73,6 @@ public class AuthController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
-
-        List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
 
         User user = userRepository.findByUsername(userDetails.getUsername()).orElse(null);
 
@@ -88,14 +88,14 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@RequestBody SubscribeDTO newUser) {
         newUser.setUsername(newUser.getUsername().toLowerCase());
         if("guest".equals(newUser.getUsername()) || "liquibase".equals(newUser.getUsername())){
-            return ResponseEntity.badRequest().body("Error: Username is restricted!");
+            return ResponseEntity.badRequest().body("errors.usernameRestricted");
         }
         if (userRepository.existsByUsername(newUser.getUsername())) {
-            return ResponseEntity.badRequest().body("Error: Username is already taken!");
+            return ResponseEntity.badRequest().body("errors.usernameUsed");
         }
 
         if (userRepository.existsByEmail(newUser.getEmail())) {
-            return ResponseEntity.badRequest().body("Error: Email is already in use!");
+            return ResponseEntity.badRequest().body("errors.emailUsed");
         }
 
         // Create new user's account
@@ -118,7 +118,7 @@ public class AuthController {
 
         userRepository.save(user);
 
-        return ResponseEntity.ok(new SimpleAnswerDTO("User registered successfully!"));
+        return ResponseEntity.ok(new SimpleAnswerDTO("user.saved"));
     }
 
 }

@@ -4,8 +4,8 @@ import {UnregisteredLayoutComponent} from './unregistered-layout/unregistered-la
 import {RegisteredLayoutComponent} from './registered-layout/registered-layout.component';
 import {TopBarComponent} from './top-bar/top-bar.component';
 import {SharedModule} from "../shared/shared.module";
-import {RouterLink} from "@angular/router";
-import { LeftMenuComponent } from './left-menu/left-menu.component';
+import {LeftMenuComponent} from './left-menu/left-menu.component';
+import {TopMenuComponent} from './top-menu/top-menu.component';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { LeftMenuComponent } from './left-menu/left-menu.component';
     UnregisteredLayoutComponent,
     RegisteredLayoutComponent,
     TopBarComponent,
-    LeftMenuComponent
+    LeftMenuComponent,
+    TopMenuComponent
   ],
   exports: [
     UnregisteredLayoutComponent,
