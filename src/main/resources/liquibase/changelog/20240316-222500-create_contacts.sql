@@ -1,8 +1,9 @@
-create table contacts
+create table users_contacts
 (
     id    serial primary key,
     user1 int not null,
     user2 int not null,
+    user2_confirmed boolean not null default false,
 
     cr_date timestamp   not null,
     cr_user varchar(64) not null,

@@ -3,8 +3,10 @@ create table sheets
     id      serial primary key,
     owner   int         not null,
 
+    character_name varchar(64) not null,
     game    varchar(64) not null,
     data    text        not null default '',
+    archived boolean not null default false,
 
     cr_date timestamp   not null,
     cr_user varchar(64) not null,

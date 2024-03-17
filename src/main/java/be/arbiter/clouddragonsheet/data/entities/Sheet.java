@@ -1,9 +1,6 @@
 package be.arbiter.clouddragonsheet.data.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +16,10 @@ public class Sheet extends AuditableEntity{
     @ManyToOne
     @JoinColumn(name="owner", nullable=false)
     private User owner;
+    @Column(name="character_name",nullable = false)
+    private String characterName;
     private String game;
     private String data;
+
+    private Boolean archived;
 }

@@ -1,0 +1,7 @@
+<div class="flex flex-row w-12 justify-content-between align-items-center">
+  <h1>{{ "menu.user.sheets" | translate }}</h1>
+  <button pButton (click)="newSheet()">{{ "sheet.create" | translate }}</button>
+</div>
+<div *ngFor="let sheet of sheets">
+  {{getString(sheet)}}
+</div>

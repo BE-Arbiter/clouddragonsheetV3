@@ -1,0 +1,5 @@
+
+export enum RolesEnum{
+  ARS_MAGICA_5TH="ARS_MAGICA_5TH",
+  DEBUG_SHEET="DEBUG_SHEET",
+}
