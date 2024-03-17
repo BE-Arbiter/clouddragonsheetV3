@@ -32,7 +32,7 @@ export class UsersListComponent implements OnInit {
     private userService: UsersService,
     private authService: AuthService,
     fb : FormBuilder,
-    private translateService: TranslateService,
+    private translate: TranslateService,
     private ui : UiService,
     private confirmationService : ConfirmationService,
   ) {
@@ -58,32 +58,39 @@ export class UsersListComponent implements OnInit {
     this.cols = [
       {
         field: 'id',
-        header: this.translateService.instant("user.id"),
+        header: this.translate.instant("user.id"),
         type: "text",
+        align: "center",
+      },
+      {
+        field: 'activated',
+        header: this.translate.instant("user.activated"),
+        type: "boolean",
+        align: "center",
       },
       {
         field: 'username',
-        header: this.translateService.instant("user.username"),
+        header: this.translate.instant("user.username"),
         type: "text",
       },
       {
         field: 'email',
-        header: this.translateService.instant("user.email"),
+        header: this.translate.instant("user.email"),
         type: "text",
       },
       {
         field: 'firstName',
-        header: this.translateService.instant("user.firstName"),
+        header: this.translate.instant("user.firstName"),
         type: "text",
       },
       {
         field: 'lastName',
-        header: this.translateService.instant("user.lastName"),
+        header: this.translate.instant("user.lastName"),
         type: "text",
       },
       {
         field: 'roles',
-        header: this.translateService.instant("user.roles"),
+        header: this.translate.instant("user.roles"),
         type: "RolesEnum",
       },
     ];
@@ -101,7 +108,7 @@ export class UsersListComponent implements OnInit {
   }
   public saveUser(){
     if(!this.formGroup.valid){
-      this.ui.warn(this.translateService.instant("errors.form.invalid"));
+      this.ui.warn(this.translate.instant("errors.form.invalid"));
       this.formGroup.markAllAsTouched();
       return;
     }
@@ -114,7 +121,7 @@ export class UsersListComponent implements OnInit {
         this.users = newUserArray;
         this.showModal = false;
         this.formGroup.reset();
-        this.ui.success(this.translateService.instant("common.saved"))
+        this.ui.success(this.translate.instant("common.saved"))
         this.ui.endProgess();
       });
     }
@@ -123,7 +130,7 @@ export class UsersListComponent implements OnInit {
         this.users.push(value);
         this.showModal = false;
         this.formGroup.reset();
-        this.ui.success(this.translateService.instant("common.created"))
+        this.ui.success(this.translate.instant("common.created"))
         this.ui.endProgess();
       });
     }
@@ -136,12 +143,12 @@ export class UsersListComponent implements OnInit {
 
   public deleteUser(user:UserAdmin){
     if(user.id == this.currentUser?.id){
-      this.ui.warn(this.translateService.instant("user.cantDeleteSelf"));
+      this.ui.warn(this.translate.instant("user.cantDeleteSelf"));
       return;
     }
       this.confirmationService.confirm({
-        message: this.translateService.instant("user.confirmDelete"),
-        header: this.translateService.instant("toast.warn"),
+        message: this.translate.instant("user.confirmDelete"),
+        header: this.translate.instant("toast.warn"),
         icon: 'pi pi-info-circle',
         acceptButtonStyleClass:"p-button-danger p-button-text",
         rejectButtonStyleClass:"p-button-text p-button-text",
@@ -152,7 +159,7 @@ export class UsersListComponent implements OnInit {
           this.ui.startProgress();
           this.userService.delete(user).subscribe(()=> {
             this.users = this.users.filter(value => value.id != user.id);
-            this.ui.success(this.translateService.instant("common.deleted"));
+            this.ui.success(this.translate.instant("common.deleted"));
             this.ui.endProgess();
           })
         }

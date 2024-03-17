@@ -5,7 +5,7 @@
 <p-table [value]="users" [tableStyleClass]="'w-12'">
   <ng-template pTemplate="header">
     <tr>
-      <th *ngFor="let col of cols">
+      <th *ngFor="let col of cols" style="{{col.align? 'text-align:'+col.align:''}}">
         {{ col.header }}
       </th>
       <th>
@@ -15,12 +15,16 @@
   </ng-template>
   <ng-template pTemplate="body" let-user>
     <tr>
-      <td *ngFor="let col of cols">
+      <td *ngFor="let col of cols" style="{{col.align? 'text-align:'+col.align:''}}">
         <ng-container *ngIf="col.type == 'text'">
           {{ user[col.field] }}
         </ng-container>
         <ng-container *ngIf="col.type == 'RolesEnum'">
           <p-badge *ngFor="let role of user[col.field]" class="m-1" value="{{('roles.'+role) | translate}}"></p-badge>
+        </ng-container>
+        <ng-container *ngIf="col.type == 'boolean'">
+          <p-badge *ngIf="user[col.field]" value="{{('common.yes') | translate}}"></p-badge>
+          <p-badge *ngIf="!user[col.field]" value="{{('common.no') | translate}}"></p-badge>
         </ng-container>
       </td>
       <td>

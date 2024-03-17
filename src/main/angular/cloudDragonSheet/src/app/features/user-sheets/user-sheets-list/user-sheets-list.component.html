@@ -1,7 +1,47 @@
-<div class="flex flex-row w-12 justify-content-between align-items-center">
+<div class="printable flex flex-row w-12 justify-content-between align-items-center">
   <h1>{{ "menu.user.sheets" | translate }}</h1>
   <button pButton (click)="newSheet()">{{ "sheet.create" | translate }}</button>
 </div>
-<div *ngFor="let sheet of sheets">
-  {{getString(sheet)}}
-</div>
+<p-table [value]="sheets" [tableStyleClass]="'w-12'">
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let col of cols" style="{{col.align? 'text-align:'+col.align:''}}">
+        {{ col.header }}
+      </th>
+      <th>
+        {{ "common.actions" | translate }}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-sheet>
+    <tr>
+      <td *ngFor="let col of cols" style="{{col.align? 'text-align:'+col.align:''}}">
+        <ng-container *ngIf="col.type == 'text'">
+          {{ sheet[col.field] }}
+        </ng-container>
+        <ng-container *ngIf="col.type == 'GameEnum'">
+          {{('game.'+sheet[col.field]) | translate}}
+        </ng-container>
+        <ng-container *ngIf="col.type == 'User'">
+          {{sheet[col.field] | username | async}}
+        </ng-container>
+        <ng-container *ngIf="col.type == 'boolean'">
+          <p-badge *ngIf="sheet[col.field]" value="{{('common.yes') | translate}}"></p-badge>
+          <p-badge *ngIf="!sheet[col.field]" value="{{('common.no') | translate}}"></p-badge>
+        </ng-container>
+      </td>
+      <td>
+        <button pButton class="p-button-white">
+          <i class="pi pi-pencil" *ngIf="!sheet.readonly"></i>
+        </button>
+        <button pButton class="p-button-white">
+          <i class="pi pi-eye" *ngIf="sheet.readonly"></i>
+        </button>
+        <button pButton class="p-button-white">
+          <i class="pi pi-trash" *ngIf="!sheet.readonly"></i>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+

@@ -20,6 +20,7 @@ import {BadgeModule} from "primeng/badge";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {MultiSelectModule} from "primeng/multiselect";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { UsernamePipe } from './pipes/username.pipe';
 
 
 const DECLARATIONS : any[] = [
@@ -27,6 +28,9 @@ const DECLARATIONS : any[] = [
   ErrorPageComponent,
   LoginFormComponent,
   SubscribeFormComponent,
+
+  //Pipes
+  UsernamePipe,
 ]
 
 const MODULES : any[] = [

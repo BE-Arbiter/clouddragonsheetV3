@@ -1,0 +1,8 @@
+@import "./variables";
+
+@media print {
+  button,
+  .screen-only{
+    display : none !important;
+  }
+}

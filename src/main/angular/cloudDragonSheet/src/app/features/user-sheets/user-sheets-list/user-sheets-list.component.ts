@@ -3,6 +3,7 @@ import {UiService} from "../../../core/services/ui.service";
 import {SheetsService} from "../../../core/services/sheets.service";
 import {Sheet} from "../../../core/model/sheet.model";
 import {TranslateService} from "@ngx-translate/core";
+import {Column} from "../../../core/model/column.model";
 
 @Component({
   selector: 'app-user-sheets-list',
@@ -12,6 +13,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class UserSheetsListComponent implements OnInit {
 
   public sheets: Sheet[] = [];
+  public cols : Column[] = [];
 
   constructor(
     private uiService: UiService,
@@ -22,6 +24,24 @@ export class UserSheetsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.sheetService.list().subscribe(value => this.sheets = value);
+
+    this.cols = [
+      {
+        field: 'game',
+        header: this.translate.instant("sheet.game"),
+        type: "GameEnum",
+      },
+      {
+        field: 'characterName',
+        header: this.translate.instant("sheet.characterName"),
+        type: "text",
+      },
+      {
+        field: 'ownerId',
+        header: this.translate.instant("sheet.owner"),
+        type: "User",
+      },
+    ];
   }
 
 

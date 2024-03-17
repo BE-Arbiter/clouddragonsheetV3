@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable, take} from "rxjs";
-import {UserAdmin} from "../model/user.model";
+import {map, Observable, take} from "rxjs";
+import {User, UserAdmin} from "../model/user.model";
 import {SimpleAnswer} from "../model/simple-answer.model";
 
 
@@ -19,6 +19,18 @@ export class UsersService{
     return this.http.get<UserAdmin[]>(`${this.basepath}/all`)
       .pipe(
         take(1),
+      );
+  }
+  public username(id : number):Observable<string>{
+    return this.http.get<User>(`${this.basepath}/${id}/username`)
+      .pipe(
+        take(1),
+        map(value => {
+          if(value){
+            return value.username || "Not found";
+          }
+          return "Not found";
+        })
       );
   }
   public delete(user : UserAdmin):Observable<SimpleAnswer>{
