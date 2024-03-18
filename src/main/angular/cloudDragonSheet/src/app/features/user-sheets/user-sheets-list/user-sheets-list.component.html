@@ -32,10 +32,10 @@
       </td>
       <td>
         <button pButton class="p-button-white">
-          <i class="pi pi-pencil" *ngIf="!sheet.readonly"></i>
+          <i class="pi pi-pencil" [routerLink]="['/user','sheets',sheet.id]" *ngIf="!sheet.readonly"></i>
         </button>
         <button pButton class="p-button-white">
-          <i class="pi pi-eye" *ngIf="sheet.readonly"></i>
+          <i class="pi pi-eye" [routerLink]="['/user','sheets',sheet.id]" *ngIf="sheet.readonly"></i>
         </button>
         <button pButton class="p-button-white">
           <i class="pi pi-trash" *ngIf="!sheet.readonly"></i>

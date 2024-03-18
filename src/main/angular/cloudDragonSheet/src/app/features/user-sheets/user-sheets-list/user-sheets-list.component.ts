@@ -49,8 +49,4 @@ export class UserSheetsListComponent implements OnInit {
     this.uiService.warn(this.translate.instant("errors.notImplemented"));
   }
 
-  public getString(sheet:Sheet){
-    return JSON.stringify(sheet);
-  }
-
 }

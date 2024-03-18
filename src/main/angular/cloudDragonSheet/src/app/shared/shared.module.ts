@@ -21,7 +21,13 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import {MultiSelectModule} from "primeng/multiselect";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import { UsernamePipe } from './pipes/username.pipe';
+import { SheetsHandlerComponent } from './sheets/sheets-handler/sheets-handler.component';
+import { SheetDebugComponent } from './sheets/sheet-debug/sheet-debug.component';
 
+const SHEETS : any[] = [
+  SheetsHandlerComponent,
+  SheetDebugComponent,
+]
 
 const DECLARATIONS : any[] = [
   ValdemortDefaultComponent,
@@ -57,8 +63,8 @@ const MODULES : any[] = [
   RouterLink,
 ]
 @NgModule({
-  declarations: [...DECLARATIONS],
+  declarations: [...DECLARATIONS, ...SHEETS],
   imports: [...MODULES],
-  exports: [...MODULES,...DECLARATIONS]
+  exports: [...MODULES,...DECLARATIONS,...SHEETS]
 })
 export class SharedModule { }

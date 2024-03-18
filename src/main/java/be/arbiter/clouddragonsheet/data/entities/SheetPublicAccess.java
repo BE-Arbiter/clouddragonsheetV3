@@ -22,5 +22,4 @@ public class SheetPublicAccess extends BaseEntity{
     @JoinColumn(name="sheet", nullable=false)
     private Sheet sheet;
 
-    private Boolean readonly;
 }

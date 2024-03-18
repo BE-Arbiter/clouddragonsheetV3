@@ -3,15 +3,18 @@ import {CommonModule} from '@angular/common';
 import {UserSheetsListComponent} from './user-sheets-list/user-sheets-list.component';
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
+import { UserSheetsEditComponent } from './user-sheets-edit/user-sheets-edit.component';
 
 
 export const FEATURES_ROUTES: Routes = [
-  {path: 'list', component: UserSheetsListComponent},
+  {path: 'user/sheets/list', component: UserSheetsListComponent, pathMatch : "full"},
+  {path: 'user/sheets/:id', component: UserSheetsEditComponent, pathMatch : "full"},
 ]
 
 @NgModule({
   declarations: [
-    UserSheetsListComponent
+    UserSheetsListComponent,
+    UserSheetsEditComponent
   ],
   imports: [
     CommonModule,

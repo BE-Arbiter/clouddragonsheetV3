@@ -25,7 +25,6 @@ export class DashboardGuard implements CanActivate {
     return this.authService.currentUser$.pipe(
       take(1),
       map(value => {
-        console.log(value);
         if (value == null || value.username === "guest") {
           return true;
         }

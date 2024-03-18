@@ -9,12 +9,13 @@ import {
 } from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {map, take} from "rxjs";
+import {RolesEnum} from "../enums/roles.enum";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoggedInGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router
@@ -25,7 +26,7 @@ export class LoggedInGuard implements CanActivate {
     return this.authService.currentUser$.pipe(
       take(1),
       map(value => {
-        if (value != null && value.username !== "guest") {
+        if (value != null && value.roles.includes(RolesEnum.ROLE_ADMIN)) {
           return true;
         }
         return this.router.parseUrl("/access-denied");

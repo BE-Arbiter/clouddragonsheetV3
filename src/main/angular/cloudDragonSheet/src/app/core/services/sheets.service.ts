@@ -22,6 +22,12 @@ export class SheetsService{
         take(1),
       );
   }
+  public get(id: number):Observable<Sheet>{
+    return this.http.get<Sheet>(`${this.basepath}/${id}`)
+      .pipe(
+        take(1),
+      );
+  }
   public delete(sheet:Sheet):Observable<SimpleAnswer>{
     return this.http.delete<SimpleAnswer>(`${this.basepath}/${sheet.id}`)
       .pipe(

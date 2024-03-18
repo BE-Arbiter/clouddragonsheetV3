@@ -1,7 +1,10 @@
 package be.arbiter.clouddragonsheet.services;
 
 import be.arbiter.clouddragonsheet.data.dtos.SheetDto;
+import be.arbiter.clouddragonsheet.data.dtos.SheetListDto;
 import be.arbiter.clouddragonsheet.data.entities.Sheet;
+import be.arbiter.clouddragonsheet.data.entities.SheetAccess;
+import be.arbiter.clouddragonsheet.data.entities.SheetPublicAccess;
 import be.arbiter.clouddragonsheet.data.entities.User;
 import be.arbiter.clouddragonsheet.repositories.SheetAccessRepository;
 import be.arbiter.clouddragonsheet.repositories.SheetPublicAccessRepository;
@@ -9,12 +12,11 @@ import be.arbiter.clouddragonsheet.repositories.SheetRepository;
 import be.arbiter.clouddragonsheet.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class SheetService {
@@ -34,22 +36,37 @@ public class SheetService {
     @Autowired
     ModelMapper mapper;
 
-    public List<SheetDto> findAllForUser(Integer userId){
-        List<SheetDto> toReturn = new ArrayList<>();
+    public List<SheetListDto> findAllForUser(Integer userId){
+        List<SheetListDto> toReturn = new ArrayList<>();
         //Récupérer toutes les fiches pour lequels je suis owwner
         toReturn.addAll(sheetRepository.findAllByOwnerId(userId).stream().map(sheet -> {
-            SheetDto sheetDto = mapper.map(sheet,SheetDto.class);
+            SheetListDto sheetDto = mapper.map(sheet,SheetListDto.class);
             sheetDto.setReadonly(false);
             return sheetDto;
         }).toList());
         //Récupérer toutes les fiches pour les quelles j'ai accès
         toReturn.addAll(sheetAccessRepository.findAllByUserId(userId).stream().map(sheetAccess -> {
-            SheetDto sheetDto = mapper.map(sheetAccess.getSheet(),SheetDto.class);
+            SheetListDto sheetDto = mapper.map(sheetAccess.getSheet(),SheetListDto.class);
             sheetDto.setReadonly(sheetAccess.getReadonly());
             return sheetDto;
         }).toList());
         return toReturn;
     }
+    public SheetDto getById(Integer id,Integer userId){
+        Sheet sheet = sheetRepository.findById(id).orElseThrow(InvalidParameterException::new);
+        SheetDto sheetDto = mapper.map(sheet,SheetDto.class);
+        if(sheet.getOwner().getId().equals(userId)
+        || sheetAccessRepository.existsByUserIdAndSheetIdAndReadonly(userId,sheet.getId(),false)){
+            sheetDto.setReadonly(false);
+            return sheetDto;
+        }
+        if(sheetAccessRepository.existsByUserIdAndSheetIdAndReadonly(userId,sheet.getId(),true)){
+            sheetDto.setReadonly(true);
+            return sheetDto;
+        }
+        throw new AccessDeniedException("errors.sheet.noAccess");
+    }
+
     public SheetDto getByToken(String token){
         SheetDto sheetDto = mapper.map(sheetPublicAccessRepository.getSheetPublicAccessByToken(token).getSheet(),SheetDto.class);
         sheetDto.setReadonly(true);
@@ -89,5 +106,34 @@ public class SheetService {
         SheetDto sheetDto = mapper.map(sheet,SheetDto.class);
         sheetDto.setReadonly(false);
         return sheetDto;
+    }
+
+    public void shareSheetToUser(Integer sheetId,User user){
+        shareSheetToUser(sheetId,user,true);
+    }
+    public void shareSheetToUser(Integer sheetId, User user,Boolean readonly) {
+        Sheet sheet = sheetRepository.findById(sheetId).orElseThrow(InvalidParameterException::new);
+        SheetAccess access = new SheetAccess();
+        access.setReadonly(readonly);
+        access.setSheet(sheet);
+        access.setUser(user);
+        sheetAccessRepository.save(access);
+    }
+
+    public void revokeSharing(Integer sheetAccessId){
+        sheetAccessRepository.deleteById(sheetAccessId);
+    }
+
+    public void shareSheetToEmail(Integer sheetId, String email) {
+        Sheet sheet = sheetRepository.findById(sheetId).orElseThrow(InvalidParameterException::new);
+        SheetPublicAccess access = new SheetPublicAccess();
+        String token = Base64.getEncoder().encodeToString(UUID.randomUUID().toString().getBytes());
+        access.setToken(token);
+        access.setSheet(sheet);
+        sheetPublicAccessRepository.save(access);
+    }
+
+    public void revokePublicSharing(Integer publicSheetAccessId){
+        sheetPublicAccessRepository.deleteById(publicSheetAccessId);
     }
 }

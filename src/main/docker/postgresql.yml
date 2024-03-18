@@ -1,0 +1,9 @@
+version: '2'
+services:
+    cds-postgresql:
+        image: postgres:16.2
+        environment:
+            - POSTGRES_USER=clouddragonsheet
+            - POSTGRES_PASSWORD=clouddragonsheet
+        ports:
+            - 5432:5432
