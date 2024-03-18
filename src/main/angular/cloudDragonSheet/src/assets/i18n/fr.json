@@ -41,6 +41,8 @@
   "roles.ROLE_USER": "Joueur",
   "roles.ROLE_ADMIN": "Admin",
   "sheet.create": "Nouvelle fiche de personnage",
+  "sheet.create.title": "Création d'une nouvelle fiche de personnage",
+  "sheet.edit.title":"Édition d'une nouvelle fiche de personnage",
   "sheet.game": "Jeu",
   "sheet.owner": "Créateur",
   "sheet.characterName": "Nom du personnage",

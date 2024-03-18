@@ -41,7 +41,7 @@
 
 <form [formGroup]="formGroup">
   <p-dialog [(visible)]="showModal" (onHide)="closeModal()" styleClass="xl:w-4 lg:w-6 md:w-8 w-12"
-            header="{{ (formGroup.value?.id ? 'user.create.title' : 'user.edit.title') | translate }}"
+            header="{{ (formGroup.value.id ? 'user.create.title' : 'user.edit.title') | translate }}"
             [modal]="true" [draggable]="false" [resizable]="false">
     <app-user-edit-form [userForm]="formGroup"></app-user-edit-form>
     <ng-template pTemplate="footer">

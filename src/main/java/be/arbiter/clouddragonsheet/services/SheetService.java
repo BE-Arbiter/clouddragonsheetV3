@@ -1,5 +1,6 @@
 package be.arbiter.clouddragonsheet.services;
 
+import be.arbiter.clouddragonsheet.data.dtos.ShareDto;
 import be.arbiter.clouddragonsheet.data.dtos.SheetDto;
 import be.arbiter.clouddragonsheet.data.dtos.SheetListDto;
 import be.arbiter.clouddragonsheet.data.entities.Sheet;
@@ -16,7 +17,10 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SheetService {
@@ -89,7 +93,7 @@ public class SheetService {
         User user = userRepository.findByUsername(userLogin).orElseThrow(InvalidParameterException::new);
         Sheet sheet = mapper.map(toSave,Sheet.class);
         sheet.setOwner(user);
-        sheet.setCrDate(Calendar.getInstance());
+        sheet.setArchived(false);
         sheet.setCrUser(userLogin);
         sheet = sheetRepository.save(sheet);
         SheetDto sheetDto = mapper.map(sheet,SheetDto.class);
@@ -100,7 +104,6 @@ public class SheetService {
     public SheetDto updateSheet(SheetDto toSave,String userLogin) {
         Sheet sheet = sheetRepository.findById(toSave.getId()).orElseThrow(InvalidParameterException::new);
         sheet.setData(toSave.getData());
-        sheet.setUpDate(Calendar.getInstance());
         sheet.setUpUser(userLogin);
         sheet = sheetRepository.save(sheet);
         SheetDto sheetDto = mapper.map(sheet,SheetDto.class);
@@ -124,16 +127,19 @@ public class SheetService {
         sheetAccessRepository.deleteById(sheetAccessId);
     }
 
-    public void shareSheetToEmail(Integer sheetId, String email) {
-        Sheet sheet = sheetRepository.findById(sheetId).orElseThrow(InvalidParameterException::new);
+    public void generateSheetToken(ShareDto shareDto) {
+        Sheet sheet = sheetRepository.findById(shareDto.getSheetId()).orElseThrow(InvalidParameterException::new);
         SheetPublicAccess access = new SheetPublicAccess();
         String token = Base64.getEncoder().encodeToString(UUID.randomUUID().toString().getBytes());
+
+        access.setComment(shareDto.getComment());
+        access.setEmail(shareDto.getEmail());
         access.setToken(token);
         access.setSheet(sheet);
         sheetPublicAccessRepository.save(access);
     }
 
-    public void revokePublicSharing(Integer publicSheetAccessId){
+    public void revokeSheetToken(Integer publicSheetAccessId){
         sheetPublicAccessRepository.deleteById(publicSheetAccessId);
     }
 }

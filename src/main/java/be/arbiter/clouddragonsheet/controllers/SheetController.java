@@ -74,7 +74,7 @@ public class SheetController {
                 sheetService.shareSheetToUser(shareDto.getSheetId(),toShareTo);
                 return ResponseEntity.ok(new SimpleAnswerDTO("Ok"));
             }
-            sheetService.shareSheetToEmail(shareDto.getSheetId(),shareDto.getEmail());
+            sheetService.generateSheetToken(shareDto);
         }
         return ResponseEntity.badRequest().body(new SimpleAnswerDTO("errors.sheets.nobodyToShareTo"));
     }

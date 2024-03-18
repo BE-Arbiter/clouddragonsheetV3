@@ -17,6 +17,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SheetPublicAccess extends BaseEntity{
     private String token;
+    private String email;
+    private String comment;
 
     @ManyToOne
     @JoinColumn(name="sheet", nullable=false)

@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Calendar;
 
@@ -17,10 +19,12 @@ import java.util.Calendar;
 public class AuditableEntity extends BaseEntity {
     @Column(name = "cr_user")
     private String crUser;
+    @CreationTimestamp
     @Column(name = "cr_date")
     private Calendar crDate;
     @Column(name = "up_user")
     private String upUser;
+    @UpdateTimestamp
     @Column(name = "up_date")
     private Calendar upDate;
 }

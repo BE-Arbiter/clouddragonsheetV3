@@ -38,6 +38,8 @@ create table sheets_access
 create table sheets_public_access
 (
     id    serial primary key,
+    email varchar(255),
+    comment varchar(255),
     token varchar(255) not null unique,
     sheet int          not null,
     constraint fk_sheet

@@ -24,8 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -105,7 +103,6 @@ public class AuthController {
         user.setRolesString(RoleEnum.ROLE_USER.name());
         //Auditing
         user.setCrUser(newUser.getUsername());
-        user.setCrDate(Calendar.getInstance());
 
 
 

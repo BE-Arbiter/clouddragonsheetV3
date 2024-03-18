@@ -19,7 +19,7 @@ export interface UserAdmin extends UserFull,AuditableModel{
 }
 
 export type UserAdminForm = {
-  id? : FormControl<number | null>
+  id : FormControl<number | null>
   username : FormControl<string>
   email : FormControl<string>
   firstName : FormControl<string>

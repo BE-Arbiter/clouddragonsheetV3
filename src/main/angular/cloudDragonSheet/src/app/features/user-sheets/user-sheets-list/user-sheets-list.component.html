@@ -31,17 +31,30 @@
         </ng-container>
       </td>
       <td>
-        <button pButton class="p-button-white">
-          <i class="pi pi-pencil" [routerLink]="['/user','sheets',sheet.id]" *ngIf="!sheet.readonly"></i>
+        <button pButton class="p-button-white" [routerLink]="['/user','sheets',sheet.id]" *ngIf="!sheet.readonly">
+          <i class="pi pi-pencil"></i>
         </button>
-        <button pButton class="p-button-white">
-          <i class="pi pi-eye" [routerLink]="['/user','sheets',sheet.id]" *ngIf="sheet.readonly"></i>
+        <button pButton class="p-button-white" [routerLink]="['/user','sheets',sheet.id]" *ngIf="sheet.readonly">
+          <i class="pi pi-eye"></i>
         </button>
-        <button pButton class="p-button-white">
-          <i class="pi pi-trash" *ngIf="!sheet.readonly"></i>
+        <button pButton class="p-button-white" *ngIf="!sheet.readonly">
+          <i class="pi pi-trash" ></i>
         </button>
       </td>
     </tr>
   </ng-template>
 </p-table>
 
+
+<form [formGroup]="sheetFormGroup">
+  <p-dialog [(visible)]="showModal" (onHide)="closeModal()" styleClass="xl:w-4 lg:w-6 md:w-8 w-12"
+            header="{{ (sheetFormGroup.value.id ? 'sheet.create.title' : 'sheet.edit.title') | translate }}"
+            [modal]="true" [draggable]="false" [resizable]="false">
+    <app-user-sheet-edit-form [sheetFormGroup]="sheetFormGroup"></app-user-sheet-edit-form>
+    <ng-template pTemplate="footer">
+      <button pButton class="p-button-secondary" type="button" (click)="closeModal()">{{ "common.cancel"|translate }}
+      </button>
+      <button pButton type="submit" (click)="saveSheet()">{{ "common.save"|translate }}</button>
+    </ng-template>
+  </p-dialog>
+</form>

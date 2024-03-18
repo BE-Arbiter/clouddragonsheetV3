@@ -1,0 +1,13 @@
+<div class="flex-column flex gap-3">
+  <div class="flex flex-column">
+    <label>{{ "sheet.game" | translate }}</label>
+    <p-dropdown  [options]="games"  [formControl]="sheetFormGroup.controls.game"
+                 appendTo="body" styleClass="w-12"></p-dropdown >
+    <val-errors [control]="sheetFormGroup.controls.game"></val-errors>
+  </div>
+  <div class="flex flex-column">
+    <label>{{ "sheet.characterName" | translate }}</label>
+    <input pInputText [formControl]="sheetFormGroup.controls.characterName">
+    <val-errors [control]="sheetFormGroup.controls.characterName"></val-errors>
+  </div>
+</div>

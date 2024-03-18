@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -95,7 +94,6 @@ public class UserController {
         user.setRolesString(String.join(",", adminDto.getRoles()));
         //Auditing
         user.setUpUser(username);
-        user.setUpDate(Calendar.getInstance());
 
         return ResponseEntity.ok().body(mapper.map(userService.save(user), UserAdminDto.class));
     }
@@ -125,7 +123,6 @@ public class UserController {
         user.setRolesString(String.join(",",adminDto.getRoles()));
         //Auditing
         user.setCrUser(username);
-        user.setCrDate(Calendar.getInstance());
         UserAdminDto userMap = mapper.map(userService.save(user), UserAdminDto.class);
         userMap.setPassword("");
         return ResponseEntity.ok(userMap);

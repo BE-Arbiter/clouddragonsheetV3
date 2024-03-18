@@ -8,5 +8,6 @@ import lombok.Data;
 public class ShareDto {
     private Integer sheetId;
     private String email;
+    private String comment;
     private Integer userId;
 }

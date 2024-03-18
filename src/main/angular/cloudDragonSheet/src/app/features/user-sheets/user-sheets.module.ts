@@ -4,6 +4,7 @@ import {UserSheetsListComponent} from './user-sheets-list/user-sheets-list.compo
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import { UserSheetsEditComponent } from './user-sheets-edit/user-sheets-edit.component';
+import {UserSheetEditFormComponent} from "./user-sheet-edit-form/user-sheet-edit-form.component";
 
 
 export const FEATURES_ROUTES: Routes = [
@@ -14,7 +15,8 @@ export const FEATURES_ROUTES: Routes = [
 @NgModule({
   declarations: [
     UserSheetsListComponent,
-    UserSheetsEditComponent
+    UserSheetsEditComponent,
+    UserSheetEditFormComponent
   ],
   imports: [
     CommonModule,
