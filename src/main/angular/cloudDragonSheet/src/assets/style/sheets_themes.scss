@@ -1,11 +1,18 @@
-[sheet-theme="GAME_DEBUG"] {
+[sheet-theme="default"] {
   --text: black;
   --page-bg: #ccc;
   --page-content-bg: white;
   --page-content-shadow: white;
 }
 
-[sheet-theme="ARS_MAGICA_5TH"]{
+[sheet-theme="DEBUG_SHEET"] {
+  --text: black;
+  --page-bg: #ccc;
+  --page-content-bg: white;
+  --page-content-shadow: white;
+}
+
+[sheet-theme="ARS_MAGICA_5TH"] {
   --text: #53332a;
   --accent1: #cc9966;
   --accent2: #885533;

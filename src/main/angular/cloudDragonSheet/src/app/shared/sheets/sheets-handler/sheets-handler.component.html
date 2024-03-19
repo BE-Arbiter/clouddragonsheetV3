@@ -1,6 +1,6 @@
 <div class="screen-only flex flex-row gap-2 w-12 justify-content-end">
-  <button pButton class="p-button-white"><i class="pi pi-save"></i></button>
-  <button pButton class="p-button-white"><i class="pi pi-print"></i></button>
+  <button pButton class="p-button-white" (click)="save()"><i class="pi pi-save"></i></button>
+  <button pButton class="p-button-white" (click)="print()"><i class="pi pi-print"></i></button>
   <button pButton class="p-button-white"><i class="pi pi-share"></i></button>
 </div>
 <div *ngIf="sheet">

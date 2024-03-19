@@ -7,7 +7,7 @@ import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
 @UntilDestroy()
 @Component({
-  selector: 'app-root',
+  selector: 'app-cloud-dragon-sheet',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

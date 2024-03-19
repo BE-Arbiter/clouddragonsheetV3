@@ -82,7 +82,7 @@ public class SheetService {
     }
 
     public Boolean userCanWriteSheet(Integer userId, Integer sheetId){
-        return sheetRepository.existsByOwnerIdAndId(userId,sheetId) &&
+        return sheetRepository.existsByOwnerIdAndId(userId,sheetId) ||
                 sheetAccessRepository.existsByUserIdAndSheetIdAndReadonly(userId,sheetId,false);
     }
 

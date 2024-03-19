@@ -24,6 +24,9 @@ import {UsernamePipe} from './pipes/username.pipe';
 import {SheetsHandlerComponent} from './sheets/sheets-handler/sheets-handler.component';
 import {SheetDebugComponent} from './sheets/sheet-debug/sheet-debug.component';
 import {DropdownModule} from "primeng/dropdown";
+import { SharedPictureComponent } from './sheets/shared-picture/shared-picture.component';
+import {DragDropModule} from "primeng/dragdrop";
+import {FileUploadModule} from "primeng/fileupload";
 
 const SHEETS : any[] = [
   SheetsHandlerComponent,
@@ -35,6 +38,7 @@ const DECLARATIONS : any[] = [
   ErrorPageComponent,
   LoginFormComponent,
   SubscribeFormComponent,
+  SharedPictureComponent,
 
   //Pipes
   UsernamePipe,
@@ -60,6 +64,8 @@ const MODULES : any[] = [
   MultiSelectModule,
   ConfirmDialogModule,
   DropdownModule,
+  DragDropModule,
+  FileUploadModule,
 
   ReactiveFormsModule,
   RouterLink,

@@ -12,6 +12,8 @@ export interface DebugAttributes {
 
 export interface DebugSheet {
   playerName: string,
+  characterName: string,
+  characterPicture: string,
   attributes: DebugAttributes
 }
 
@@ -23,6 +25,8 @@ export type DebugAttributesForm = {
 
 export type DebugSheetForm = {
   playerName: FormControl<string>,
+  characterName: FormControl<string>,
+  characterPicture : FormControl<string>,
   attributes: FormGroup<DebugAttributesForm>
 }
 
@@ -54,6 +58,8 @@ export class DebugSheetManager implements OnInit {
     const username:string = (this.currentUser && this.currentUser.username) ? this.currentUser.username : "";
     return this.fb.group<DebugSheetForm>({
       playerName: this.fb.control(username,Validators.required),
+      characterName: this.fb.control("",Validators.required),
+      characterPicture: this.fb.control("",Validators.required),
       attributes: this.attributeFormGroup
     });
   }

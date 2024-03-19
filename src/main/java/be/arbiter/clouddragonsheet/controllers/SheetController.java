@@ -96,7 +96,7 @@ public class SheetController {
         if(!sheetService.userCanWriteSheet(user.getId(),toUpdate.getId())){
             return ResponseEntity.badRequest().body("errors.sheet.readOnly");
         }
-        return ResponseEntity.ok(sheetService.createSheet(toUpdate,username));
+        return ResponseEntity.ok(sheetService.updateSheet(toUpdate,username));
     }
 
     @DeleteMapping("/{id}")

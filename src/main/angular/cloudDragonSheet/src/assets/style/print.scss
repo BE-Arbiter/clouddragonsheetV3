@@ -1,12 +1,5 @@
 @import "./variables";
 
-@media print {
-  button,
-  .screen-only{
-    display : none !important;
-  }
-}
-
 /* Page Layout */
 .page {
   width: 210mm;
@@ -76,8 +69,6 @@
 @media screen {
   /* Screen styles */
   body {
-    background: #e0e0e0;
-    background: linear-gradient(to right, #c0c0c0 0%, #e0e0e0 50%, #c0c0c0 100%);
     padding: 0;
     margin: 0;
   }
@@ -97,20 +88,19 @@
 @media print {
   @page {
     margin: 0;
+    padding: 0;
   }
 
   html, body {
-    height: 100%;
+    height: 100% ;
+    width: 100%;
     padding: 0;
     margin: 0;
   }
 
-  main {
-    height: 100%;
-  }
-
-  .config, .menu,.footer,.print-button-container {
-    display: none !important;
+  .config, .menu,.footer,.print-button-container,p-toast,
+  button,  .screen-only{
+    display : none !important;
   }
 
   .page {

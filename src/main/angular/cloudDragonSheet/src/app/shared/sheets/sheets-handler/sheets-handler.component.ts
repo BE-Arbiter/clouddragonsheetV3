@@ -21,9 +21,20 @@ export class SheetsHandlerComponent implements OnInit{
   ngOnInit(): void {
     this.sheetsService.get(this.sheetId).subscribe(value => {
       this.sheet = value;
+      document.body.setAttribute('sheet-theme',this.sheet.game);
     });
   }
 
+  public save():void{
+    this.sheetsService.update(this.sheet).subscribe(value => {
+      this.sheet = value;
+      document.body.setAttribute('sheet-theme',this.sheet.game);
+    });
+  }
+
+  public print():void{
+    window.print();
+  }
 
   public GAME_DEBUG_SHEET = GamesEnum.DEBUG_SHEET;
 }
