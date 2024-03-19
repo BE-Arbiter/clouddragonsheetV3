@@ -1,0 +1,11 @@
+<div  class="flex flex-row w-12 align-items-center justify-content-center">
+
+  <!--Cacher le p-upload pour avoir un bouton custom-->
+  <div style="display:none">
+    <p-fileUpload mode="basic" [auto]="true" chooseLabel="{{'upload.choose'| translate}}" #fileUpload
+                  chooseIcon="" [multiple]="false"
+                  [accept]="'images/*'" [customUpload]="true" (uploadHandler)="doUpload($event)">
+    </p-fileUpload>
+  </div>
+  <div pDroppable (onDrop)="onDrop($event)" (click)="fileUpload.basicFileInput?.nativeElement.click()" class="char-picture" style="background-image: url({{value}})"></div>
+</div>
