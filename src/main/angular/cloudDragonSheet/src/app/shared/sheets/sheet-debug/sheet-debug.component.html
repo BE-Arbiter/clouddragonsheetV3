@@ -3,8 +3,8 @@
       <img class="logo" alt="logo" src="assets/images/logo.png">
       <h3>{{ "sheet.debug.title" | translate }}</h3>
   </div>
-  <div class="page-copyright">TEST</div>
-  <div class="page-number">3</div>
+  <div class="page-copyright">{{ 'common.copyright'|translate }}</div>
+  <div class="page-number">1</div>
   <div class="page-contents flex flex-column align-items-stretch gap-2" *ngIf="formGroup">
     <div class="header-spacer"></div>
     <app-shared-picture [formControl]="formGroup.controls.characterPicture"></app-shared-picture>
@@ -24,17 +24,17 @@
       <div class="flex flex-column w-6 gap-2">
         <div class="flex flex-column">
           <label>{{ "sheet.debug.body" | translate }}</label>
-          <input pInputText [formControl]="formGroup.controls.attributes.controls.body">
+          <input type="number" step="1" pInputText [formControl]="formGroup.controls.attributes.controls.body">
           <val-errors [control]="formGroup.controls.attributes.controls.body"></val-errors>
         </div>
         <div class="flex flex-column">
           <label>{{ "sheet.debug.mind" | translate }}</label>
-          <input pInputText [formControl]="formGroup.controls.attributes.controls.mind">
+          <input type="number" step="1" pInputText [formControl]="formGroup.controls.attributes.controls.mind">
           <val-errors [control]="formGroup.controls.attributes.controls.mind"></val-errors>
         </div>
         <div class="flex flex-column">
           <label>{{ "sheet.debug.spirit" | translate }}</label>
-          <input pInputText [formControl]="formGroup.controls.attributes.controls.spirit">
+          <input type="number" step="1" pInputText [formControl]="formGroup.controls.attributes.controls.spirit">
           <val-errors [control]="formGroup.controls.attributes.controls.spirit"></val-errors>
         </div>
       </div>
