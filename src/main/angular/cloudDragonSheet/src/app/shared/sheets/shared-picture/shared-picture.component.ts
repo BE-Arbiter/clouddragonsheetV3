@@ -1,6 +1,7 @@
 import {Component, forwardRef, Input, ViewChild} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {FileUpload} from "primeng/fileupload";
+import {UiService} from "../../../core/services/ui.service";
 
 @Component({
   selector: 'app-shared-picture',
@@ -16,14 +17,17 @@ import {FileUpload} from "primeng/fileupload";
 })
 export class SharedPictureComponent implements ControlValueAccessor {
   @ViewChild('fileUpload', {static: false}) public fileUpload: FileUpload | any;
-
   @Input()
   formControl! : FormControl<string>;
-
   public value!: string;
   public onChange!: any;
   public onTouched!: any;
   public disabled: boolean = false;
+
+  constructor(
+    private ui : UiService,
+  ) {
+  }
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -58,8 +62,14 @@ export class SharedPictureComponent implements ControlValueAccessor {
     }
     for(let file of fileList){
       if(file instanceof File) {
-        let filename = file.name;
-        let mimeType = file.type;
+        let size = file.size;
+        let maxSize = 1024 * 1024; // 1Mb
+        if(size >= maxSize){
+          this.ui.warn("errors.file.tooLarge");
+          this.clear();
+          return;
+        }
+
         let data: string = '';
 
         let reader = new FileReader();
@@ -67,7 +77,12 @@ export class SharedPictureComponent implements ControlValueAccessor {
           "load",
           () => {
           data = reader.result as string;
-          this.writeValue(data);
+          if(this.formControl){
+            this.formControl.patchValue(data);
+          }
+          else {
+            this.writeValue(data);
+          }
           this.clear();
         });
         reader.readAsDataURL(file);

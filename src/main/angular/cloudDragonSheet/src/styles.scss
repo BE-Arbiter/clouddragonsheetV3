@@ -14,6 +14,12 @@
 @import "assets/style/progress-bar-block";
 @import "assets/style/button-white";
 
+* {
+  -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+  color-adjust: exact !important; /*Firefox*/
+  box-sizing: border-box;
+}
+
 body{
   margin: 0;
   padding : 0;
