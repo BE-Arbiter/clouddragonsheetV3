@@ -104,6 +104,7 @@ public class SheetService {
     public SheetDto updateSheet(SheetDto toSave,String userLogin) {
         Sheet sheet = sheetRepository.findById(toSave.getId()).orElseThrow(InvalidParameterException::new);
         sheet.setData(toSave.getData());
+        sheet.setCharacterName(toSave.getCharacterName());
         sheet.setUpUser(userLogin);
         sheet = sheetRepository.save(sheet);
         SheetDto sheetDto = mapper.map(sheet,SheetDto.class);

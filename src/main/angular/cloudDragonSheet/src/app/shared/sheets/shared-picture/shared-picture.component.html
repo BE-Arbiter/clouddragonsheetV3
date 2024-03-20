@@ -4,7 +4,7 @@
   <div style="display:none">
     <p-fileUpload mode="basic" [auto]="true" chooseLabel="{{'upload.choose'| translate}}" #fileUpload
                   chooseIcon="" [multiple]="false"
-                  [accept]="'images/*'" [customUpload]="true" (uploadHandler)="doUpload($event)">
+                  [accept]="'image/*'" [customUpload]="true" (uploadHandler)="doUpload($event)">
     </p-fileUpload>
   </div>
   <div pDroppable (onDrop)="onDrop($event)" (click)="fileUpload.basicFileInput?.nativeElement.click()" class="char-picture" style="background-image: url({{value}})"></div>

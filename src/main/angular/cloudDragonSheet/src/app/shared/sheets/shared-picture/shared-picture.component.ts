@@ -1,5 +1,5 @@
-import {Component, forwardRef, ViewChild} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Component, forwardRef, Input, ViewChild} from '@angular/core';
+import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {FileUpload} from "primeng/fileupload";
 
 @Component({
@@ -16,6 +16,9 @@ import {FileUpload} from "primeng/fileupload";
 })
 export class SharedPictureComponent implements ControlValueAccessor {
   @ViewChild('fileUpload', {static: false}) public fileUpload: FileUpload | any;
+
+  @Input()
+  formControl! : FormControl<string>;
 
   public value!: string;
   public onChange!: any;
@@ -35,7 +38,7 @@ export class SharedPictureComponent implements ControlValueAccessor {
   }
 
   writeValue(obj: string): void {
-    this.value = obj
+    this.value = obj;
   }
 
   onDrop($event: DragEvent) { }
@@ -53,21 +56,20 @@ export class SharedPictureComponent implements ControlValueAccessor {
     } else {
       fileList = event.files;
     }
-    let files : File[] = [];
     for(let file of fileList){
       if(file instanceof File) {
-        let file = event as File;
         let filename = file.name;
         let mimeType = file.type;
         let data: string = '';
 
         let reader = new FileReader();
-        reader.onload = () => {
+        reader.addEventListener(
+          "load",
+          () => {
           data = reader.result as string;
-          console.log(data);
           this.writeValue(data);
-
-        };
+          this.clear();
+        });
         reader.readAsDataURL(file);
         return;
       }

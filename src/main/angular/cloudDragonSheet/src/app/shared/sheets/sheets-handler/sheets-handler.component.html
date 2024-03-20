@@ -4,5 +4,5 @@
   <button pButton class="p-button-white"><i class="pi pi-share"></i></button>
 </div>
 <div *ngIf="sheet">
-  <app-sheet-debug *ngIf="sheet.game == GAME_DEBUG_SHEET" [sheet]="sheet"></app-sheet-debug>
+  <app-sheet-debug *ngIf="sheet.game == GAME_DEBUG_SHEET" [formGroupSubject]="formGroupSubject" [sheet]="sheet"></app-sheet-debug>
 </div>

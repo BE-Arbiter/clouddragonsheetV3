@@ -1,13 +1,9 @@
-[sheet-theme="default"] {
-  --text: black;
-  --page-bg: #ccc;
-  --page-content-bg: white;
-  --page-content-shadow: white;
-}
-
+[sheet-theme="default"] ,
 [sheet-theme="DEBUG_SHEET"] {
   --text: black;
   --page-bg: #ccc;
+  --accent1: #aaa;
+  --accent2: #888;
   --page-content-bg: white;
   --page-content-shadow: white;
 }
