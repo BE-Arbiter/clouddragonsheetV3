@@ -1,4 +1,4 @@
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 
 export interface AM5Ability {
   experience: number;
@@ -14,5 +14,4 @@ export type AM5AbilityForm = {
   specialty: FormControl<string>;
   value: FormControl<number>;
   notes: FormControl<string>;
-}
 }

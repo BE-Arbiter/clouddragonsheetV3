@@ -1,8 +1,8 @@
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Injectable, OnInit} from "@angular/core";
-import {UserFull} from "../model/user.model";
-import {AuthService} from "../services/auth.service";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {UserFull} from "../core/model/user.model";
+import {AuthService} from "../core/services/auth.service";
 
 export interface DebugAttributes {
   body: number,
@@ -72,7 +72,7 @@ export class DebugSheetManager implements OnInit {
     })
   }
 
-  public get fb(){
+  private get fb(){
     return this._fb.nonNullable;
   }
 
