@@ -1,5 +1,6 @@
 @import "./variables";
 
+
 .p-button.p-button-white{
   display: inline-flex;
   justify-content: center;
@@ -19,4 +20,8 @@
 }
 .p-button.p-button-white:focus{
   box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px $secondary-color-light, 0 1px 2px 0 $secondary-color;
+}
+
+.p-button.p-button-start{
+  justify-content: start;
 }

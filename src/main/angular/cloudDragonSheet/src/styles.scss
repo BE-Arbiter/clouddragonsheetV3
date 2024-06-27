@@ -7,12 +7,13 @@
 
 @import "assets/style/variables";
 @import "assets/style/sheets_themes";
+@import "assets/style/sheets_ars_magica";
 
 @import "assets/style/custom-card-radio";
 @import "assets/style/components";
 @import "assets/style/print";
 @import "assets/style/progress-bar-block";
-@import "assets/style/button-white";
+@import "assets/style/custom-buttons";
 
 * {
   -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */

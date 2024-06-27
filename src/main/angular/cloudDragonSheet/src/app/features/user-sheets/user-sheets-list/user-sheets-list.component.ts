@@ -6,8 +6,9 @@ import {TranslateService} from "@ngx-translate/core";
 import {Column} from "../../../core/model/column.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GamesEnum} from "../../../core/enums/games.enum";
-import {DebugSheetManager} from "../../../core/sheets/debug.sheet";
 import {take} from "rxjs";
+import {DebugSheetManager} from "../../../shared/sheets/debug-sheet/debug.sheet";
+import {ArsMagicaSheetManager} from "../../../shared/sheets/ars-magica-sheet/ars-magica.sheet";
 
 @Component({
   selector: 'app-user-sheets-list',
@@ -29,7 +30,8 @@ export class UserSheetsListComponent implements OnInit {
     private translate: TranslateService,
     private sheetService: SheetsService,
     //Sheets Managers
-    private debugSheetManager: DebugSheetManager,
+    private debugSM: DebugSheetManager,
+    private arsMagicaSM : ArsMagicaSheetManager
   ) {
     this.sheetFormGroup = fb.group<SheetForm>({
       id: fb.control(null),
@@ -65,10 +67,10 @@ export class UserSheetsListComponent implements OnInit {
     let sheet: Sheet = {...this.sheetFormGroup.value} as Sheet;
     switch (sheet.game) {
       case GamesEnum.DEBUG_SHEET:
-        sheet.data = JSON.stringify(this.debugSheetManager.initialData);
+        sheet.data = JSON.stringify(this.debugSM.initialData);
         break;
       case GamesEnum.ARS_MAGICA_5TH:
-        sheet.data = JSON.stringify({});
+        sheet.data = JSON.stringify(this.arsMagicaSM.initialData);
     }
     if (sheet.id) {
       this.sheetService.update(sheet).pipe(take(1)).subscribe(value => {

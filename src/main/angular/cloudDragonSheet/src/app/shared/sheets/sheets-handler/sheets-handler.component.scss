@@ -1,0 +1,10 @@
+.top-bar{
+  display:flex;
+  position:absolute;
+  width:100%;
+  right:0;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-direction: row;
+  z-index:101
+}

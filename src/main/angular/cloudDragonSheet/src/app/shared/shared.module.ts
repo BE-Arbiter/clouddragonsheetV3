@@ -22,18 +22,20 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {UsernamePipe} from './pipes/username.pipe';
 import {SheetsHandlerComponent} from './sheets/sheets-handler/sheets-handler.component';
-import {SheetDebugComponent} from './sheets/sheet-debug/sheet-debug.component';
 import {DropdownModule} from "primeng/dropdown";
-import { SharedPictureComponent } from './sheets/shared-picture/shared-picture.component';
+import {SharedPictureComponent} from './components/shared-picture/shared-picture.component';
 import {DragDropModule} from "primeng/dragdrop";
 import {FileUploadModule} from "primeng/fileupload";
+import {SheetDebugComponent} from "./sheets/debug-sheet/component/sheet-debug.component";
+import {SheetArsMagicaComponent} from "./sheets/ars-magica-sheet/component/sheet-ars-magica.component";
 
 const SHEETS : any[] = [
-  SheetsHandlerComponent,
   SheetDebugComponent,
+  SheetArsMagicaComponent,
 ]
 
 const DECLARATIONS : any[] = [
+  SheetsHandlerComponent,
   ValdemortDefaultComponent,
   ErrorPageComponent,
   LoginFormComponent,
@@ -71,8 +73,8 @@ const MODULES : any[] = [
   RouterLink,
 ]
 @NgModule({
-  declarations: [...DECLARATIONS, ...SHEETS],
+  declarations: [...DECLARATIONS,...SHEETS],
   imports: [...MODULES],
-  exports: [...MODULES,...DECLARATIONS,...SHEETS]
+  exports: [...MODULES,...DECLARATIONS]
 })
 export class SharedModule { }

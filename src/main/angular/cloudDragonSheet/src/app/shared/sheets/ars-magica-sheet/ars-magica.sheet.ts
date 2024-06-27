@@ -5,10 +5,10 @@ import {AM5CharacteristicForm, AM5CharacteristicsForm} from "./model/AM5-charact
 import {AM5GeneralDataForm} from "./model/AM5-general.model";
 import {AM5VirtueForm} from "./model/AM5-virtue.model";
 import {AM5AbilityForm} from "./model/AM5-ability.model";
-import {UserFull} from "../../core/model/user.model";
-import {AuthService} from "../../core/services/auth.service";
 import {ArsMagicaFormGroup, ArsMagicaSheet} from "./model/AM5-sheet.model";
 import {AM5PersonalityForm} from "./model/AM5-personality.model";
+import {UserFull} from "../../../core/model/user.model";
+import {AuthService} from "../../../core/services/auth.service";
 
 @UntilDestroy()
 @Injectable({
@@ -118,6 +118,7 @@ export class ArsMagicaSheetManager implements OnInit {
       birthYear: this.fb.control(""),
       birthPlace: this.fb.control(""),
       occupation: this.fb.control(""),
+      religion: this.fb.control(""),
       sex: this.fb.control(""),
       nationality: this.fb.control(""),
       height: this.fb.control(""),

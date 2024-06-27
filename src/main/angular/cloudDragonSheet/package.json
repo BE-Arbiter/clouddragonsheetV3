@@ -1,12 +1,13 @@
 {
   "name": "cloud-dragon-sheet",
-  "version": "0.0.0",
+  "version": "3.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "i18n:extract": "ngx-translate-extract --input ./src --output ./src/assets/i18n/{en,fr}.json --clean --format json",
     "i18n:extract-fr": "ngx-translate-extract --input ./src --output ./src/assets/i18n/fr.json --sort -d MISSIG_TRANSLATE --format-indentation \"    \"",
     "i18n:extract-en": "ngx-translate-extract --input ./src --output ./src/assets/i18n/en.json --sort -d MISSIG_TRANSLATE --format-indentation \"    \""
   },

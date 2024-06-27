@@ -1,4 +1,8 @@
-<div class="leftMenu flex flex-column h-full">
-  <p>left-menu works!</p>
+<div class="leftMenu screen-only flex flex-column h-full">
+    <button [routerLink]="menuItem.routerLink" class="gap-2 pl-2 p-button-start p-button-white" pButton
+            *ngFor="let menuItem of menu">
+      <i class="{{menuItem.iconClass}}" *ngIf="menuItem.iconClass"></i>
+      {{ menuItem.label }}
+    </button>
 </div>
 

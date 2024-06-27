@@ -18,24 +18,24 @@ export class UiService{
   }
 
   public info(message:string,title:string|null = null){
-    let _title = title || this.translate.instant('toast.info');
+    let _title = title || 'toast.info';
     this.notify('info',message,_title);
   }
   public warn(message:string,title:string|null = null){
-    let _title = title || this.translate.instant('toast.warn');
+    let _title = title || 'toast.warn';
     this.notify('warn',message,_title);
   }
   public error(message:string,title:string|null = null){
-    let _title = title || this.translate.instant('toast.error');
+    let _title = title || 'toast.error';
     this.notify('error',message,_title);
   }
   public success(message:string,title:string|null = null){
-    let _title = title || this.translate.instant('toast.success');
+    let _title = title || 'toast.success';
     this.notify('success',message,_title);
   }
 
   public notify(type:string,message:string,title:string){
-    this.messageService.add({severity:type,summary:title,detail:message});
+    this.messageService.add({severity:type,summary:this.translate.instant(title),detail:this.translate.instant(message)});
     this.ar.tick();
   }
 

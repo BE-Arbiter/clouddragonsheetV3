@@ -4,6 +4,7 @@ import {GamesEnum} from "../../../core/enums/games.enum";
 import {SheetsService} from "../../../core/services/sheets.service";
 import {BehaviorSubject} from "rxjs";
 import {FormGroup} from "@angular/forms";
+import {UiService} from "../../../core/services/ui.service";
 
 @Component({
   selector: 'app-sheets-handler',
@@ -19,6 +20,7 @@ export class SheetsHandlerComponent implements OnInit{
 
   constructor(
     private sheetsService : SheetsService,
+    private ui: UiService,
   ) {
   }
 
@@ -38,6 +40,7 @@ export class SheetsHandlerComponent implements OnInit{
     this.sheetsService.update(this.sheet).subscribe(value => {
       this.sheet = value;
       document.body.setAttribute('sheet-theme',this.sheet.game);
+      this.ui.success("common.saved")
     });
   }
 
@@ -45,5 +48,5 @@ export class SheetsHandlerComponent implements OnInit{
     window.print();
   }
 
-  public GAME_DEBUG_SHEET = GamesEnum.DEBUG_SHEET;
+  public gameEnums = GamesEnum;
 }

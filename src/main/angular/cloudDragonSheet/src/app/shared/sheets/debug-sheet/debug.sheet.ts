@@ -1,34 +1,9 @@
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Injectable, OnInit} from "@angular/core";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {UserFull} from "../core/model/user.model";
-import {AuthService} from "../core/services/auth.service";
-
-export interface DebugAttributes {
-  body: number,
-  mind: number,
-  spirit: number,
-}
-
-export interface DebugSheet {
-  playerName: string,
-  characterName: string,
-  characterPicture: string,
-  attributes: DebugAttributes
-}
-
-export type DebugAttributesForm = {
-  body: FormControl<number>,
-  mind: FormControl<number>,
-  spirit: FormControl<number>
-}
-
-export type DebugSheetForm = {
-  playerName: FormControl<string>,
-  characterName: FormControl<string>,
-  characterPicture : FormControl<string>,
-  attributes: FormGroup<DebugAttributesForm>
-}
+import {DebugAttributesForm, DebugSheet, DebugSheetForm} from "./model/debug-sheet";
+import {UserFull} from "../../../core/model/user.model";
+import {AuthService} from "../../../core/services/auth.service";
 
 @UntilDestroy()
 @Injectable({

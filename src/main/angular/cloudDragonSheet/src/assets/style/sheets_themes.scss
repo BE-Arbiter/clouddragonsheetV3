@@ -16,3 +16,9 @@
   --page-content-bg: rgba(255, 255, 255, 0.5);
   --page-content-shadow: rgba(255, 255, 255, 0.5);
 }
+
+app-sheets-handler{
+  label{
+    color : var(--text);
+  }
+}

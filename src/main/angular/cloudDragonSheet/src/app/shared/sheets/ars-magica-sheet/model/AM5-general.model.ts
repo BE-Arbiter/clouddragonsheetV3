@@ -9,6 +9,7 @@ export interface AM5GeneralData {
   birthYear: string;
   birthPlace: string;
   occupation: string;
+  religion: string;
   sex: string;
   nationality: string;
   height: string;
@@ -28,6 +29,7 @@ export type AM5GeneralDataForm = {
   birthYear: FormControl<string>;
   birthPlace: FormControl<string>;
   occupation: FormControl<string>;
+  religion: FormControl<string>;
   sex: FormControl<string>;
   nationality: FormControl<string>;
   height: FormControl<string>;

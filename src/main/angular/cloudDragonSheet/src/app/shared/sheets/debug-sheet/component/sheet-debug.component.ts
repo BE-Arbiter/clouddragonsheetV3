@@ -1,8 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
-import {Sheet} from "../../../core/model/sheet.model";
 import {FormGroup} from "@angular/forms";
-import {DebugSheet, DebugSheetForm, DebugSheetManager} from "../../../core/sheets/debug.sheet";
+import {DebugSheetManager} from "../debug.sheet";
 import {BehaviorSubject} from "rxjs";
+import {DebugSheet, DebugSheetForm} from "../model/debug-sheet";
+import {Sheet} from "../../../../core/model/sheet.model";
 
 @Component({
   selector: 'app-sheet-debug',
@@ -41,7 +42,6 @@ export class SheetDebugComponent implements OnInit, OnChanges {
       }
     }
     if (changes["formGroupSubject"]) {
-
       let change = changes["formGroupSubject"] as SimpleChange;
       if (change.currentValue && (change.firstChange || change.currentValue != change.previousValue)) {
         if (this.formGroup) {

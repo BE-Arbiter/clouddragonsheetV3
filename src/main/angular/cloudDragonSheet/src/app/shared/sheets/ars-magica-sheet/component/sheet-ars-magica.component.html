@@ -1,0 +1,249 @@
+<div class="page">
+  <div class="page-copyright">{{ 'common.copyright'|translate }}</div>
+  <div class="page-number">1</div>
+  <div class="page-contents flex flex-column align-items-stretch gap-2" *ngIf="formGroup">
+    <div class="flex flex-row align-items-center justify-content-center mt-8 pt-4 mb-4">
+      <img alt="Ars Magica" src="../../../../assets/images/ars-magica/titre.png">
+    </div>
+    <app-shared-picture [formControl]="formGroup.controls.characterPicture"></app-shared-picture>
+    <h1 class="flex flex-row justify-content-center align-items-center">
+      {{ "sheet.ars-magica.title" | translate }}
+    </h1>
+    <div class="flex flex-row gap-4 mt-8">
+      <div class="general-field w-4">
+        <label class="w-5">{{ "sheet.ars-magica.player" | translate }}</label>
+        <input class="w-7" [formControl]="formGroup.controls.playerName">
+      </div>
+      <div class="general-field w-4">
+        <label class="w-5">{{ "sheet.ars-magica.game" | translate }}</label>
+        <input class="w-7" [formControl]="formGroup.controls.gameName">
+      </div>
+      <div class="general-field w-4">
+        <label class="w-5">{{ "sheet.ars-magica.character" | translate }}</label>
+        <input class="w-7" [formControl]="formGroup.controls.characterName">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page">
+  <div class="page-copyright">{{ 'common.copyright'|translate }}</div>
+  <div class="page-number">1</div>
+  <div class="page-contents flex flex-column align-items-stretch gap-2" *ngIf="formGroup">
+    <div class="flex flex-row gap-2">
+      <div class="flex flex-column gap-1 w-6">
+        <div class="flex flex-row field">
+          <label>{{ "sheet.ars-magica.character" | translate }}</label>
+          <input class="flex-1" [formControl]="formGroup.controls.characterName">
+        </div>
+
+        <div class="flex flex-row gap-1">
+          <div class="general-field w-6">
+            <label class="w-4">{{ "sheet.ars-magica.player" | translate }}</label>
+            <input class="w-8" [formControl]="formGroup.controls.playerName">
+          </div>
+          <div class="general-field w-6">
+            <label class="w-4">{{ "sheet.ars-magica.game" | translate }}</label>
+            <input class="w-8" [formControl]="formGroup.controls.gameName">
+          </div>
+        </div>
+
+        <div class="flex flex-row gap-1">
+          <div class="general-field w-6">
+            <label class="w-4">{{ "sheet.ars-magica.tribunal" | translate }}</label>
+            <input class="w-8" [formControl]="formGroup.controls.general.controls.tribunal">
+          </div>
+          <div class="general-field w-6">
+            <label class="w-4">{{ "sheet.ars-magica.year" | translate }}</label>
+            <input class="w-8" [formControl]="formGroup.controls.general.controls.year">
+          </div>
+        </div>
+        <div class="flex flex-row gap-1">
+          <label class="w-2">{{ "sheet.ars-magica.confidence" | translate }}</label>
+          <input class="w-4" [formControl]="formGroup.controls.general.controls.confidenceValue">
+          (
+          <input class="w-2" [formControl]="formGroup.controls.general.controls.confidencePoint">
+          )
+        </div>
+
+      </div>
+      <div class="flex flex-row w-6 align-items-center justify-content-center">
+        <img class="w-12" alt="Ars Magica" src="../../../../assets/images/ars-magica/titre.png">
+      </div>
+    </div>
+
+    <div class="flex flex-row gap-2 align-items-stretch">
+      <section class="w-6 gap-1">
+        <h1>{{ "sheet.ars-magica.characteristics" | translate }}</h1>
+        <div class="general-field">
+          <div class="left w-3"></div>
+          <div class="w-2"></div>
+          <label class="center w-2">{{ "sheet.ars-magica.characteristics.tech" | translate }}</label>
+          <div class="composite-input w-3">
+            <label class="center w-12">{{ "sheet.ars-magica.characteristics.note" | translate }}</label>
+          </div>
+          <label class="center w-2">{{ "sheet.ars-magica.characteristics.value" | translate }}</label>
+        </div>
+        <div class="general-field">
+          <label class="left w-3">{{ "sheet.ars-magica.characteristics.intelligence" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.characteristics.int" | translate }}</label>
+          <label class="center w-2">-</label>
+          <div class="composite-input w-3">
+            (
+            <input [formControl]="formGroup.controls.characteristics.controls.intelligence.controls.note">
+            )
+          </div>
+          <input class="w-2" [formControl]="formGroup.controls.characteristics.controls.intelligence.controls.value">
+        </div>
+        <div class="general-field">
+          <label class="left w-3">{{ "sheet.ars-magica.characteristics.perception" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.characteristics.per" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.arts.in" | translate }}</label>
+          <div class="composite-input w-3">
+            (
+            <input [formControl]="formGroup.controls.characteristics.controls.perception.controls.note">
+            )
+          </div>
+          <input class="w-2" [formControl]="formGroup.controls.characteristics.controls.perception.controls.value">
+        </div>
+        <div class="general-field">
+          <label class="left w-3">{{ "sheet.ars-magica.characteristics.presence" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.characteristics.pre" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.arts.re" | translate }}</label>
+          <div class="composite-input w-3">
+            (
+            <input [formControl]="formGroup.controls.characteristics.controls.presence.controls.note">
+            )
+          </div>
+          <input class="w-2" [formControl]="formGroup.controls.characteristics.controls.presence.controls.value">
+        </div>
+        <div class="general-field">
+          <label class="left w-3">{{ "sheet.ars-magica.characteristics.communication" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.characteristics.com" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.arts.cr" | translate }}</label>
+          <div class="composite-input w-3">
+            (
+            <input [formControl]="formGroup.controls.characteristics.controls.communication.controls.note">
+            )
+          </div>
+          <input class="w-2" [formControl]="formGroup.controls.characteristics.controls.communication.controls.value">
+        </div>
+        <div class="hr"></div>
+        <div class="general-field">
+          <label class="left w-3">{{ "sheet.ars-magica.characteristics.strength" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.characteristics.str" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.arts.pe" | translate }}</label>
+          <div class="composite-input w-3">
+            (
+            <input [formControl]="formGroup.controls.characteristics.controls.strength.controls.note">
+            )
+          </div>
+          <input class="w-2" [formControl]="formGroup.controls.characteristics.controls.strength.controls.value">
+        </div>
+        <div class="general-field">
+          <label class="left w-3">{{ "sheet.ars-magica.characteristics.endurance" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.characteristics.end" | translate }}</label>
+          <label class="center w-2">-</label>
+          <div class="composite-input w-3">
+            (
+            <input [formControl]="formGroup.controls.characteristics.controls.endurance.controls.note">
+            )
+          </div>
+          <input class="w-2" [formControl]="formGroup.controls.characteristics.controls.endurance.controls.value">
+        </div>
+        <div class="general-field">
+          <label class="left w-3">{{ "sheet.ars-magica.characteristics.dexterity" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.characteristics.dex" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.arts.mu" | translate }}</label>
+          <div class="composite-input w-3">
+            (
+            <input [formControl]="formGroup.controls.characteristics.controls.dexterity.controls.note">
+            )
+          </div>
+          <input class="w-2" [formControl]="formGroup.controls.characteristics.controls.dexterity.controls.value">
+        </div>
+        <div class="general-field">
+          <label class="left w-3">{{ "sheet.ars-magica.characteristics.vivacity" | translate }}</label>
+          <label class="center w-2">{{ "sheet.ars-magica.characteristics.viv" | translate }}</label>
+          <label class="center w-2">-</label>
+          <div class="composite-input w-3">
+            (
+            <input [formControl]="formGroup.controls.characteristics.controls.vivacity.controls.note">
+            )
+          </div>
+          <input class="w-2" [formControl]="formGroup.controls.characteristics.controls.vivacity.controls.value">
+        </div>
+      </section>
+      <section class="w-6">
+        <div class="general-field">
+          <label class="left w-4">{{ "sheet.ars-magica.birthName" | translate }}</label>
+          <input class="w-8" [formControl]="formGroup.controls.general.controls.birthName">
+        </div>
+        <div class="general-field">
+          <label class="left w-4">{{ "sheet.ars-magica.birthYear" | translate }}</label>
+          <input class="w-8" [formControl]="formGroup.controls.general.controls.birthYear">
+        </div>
+        <div class="general-field">
+          <label class="left w-4">{{ "sheet.ars-magica.sex" | translate }}</label>
+          <input class="w-8" [formControl]="formGroup.controls.general.controls.sex">
+        </div>
+        <div class="general-field">
+          <label class="left w-4">{{ "sheet.ars-magica.nationality" | translate }}</label>
+          <input class="w-8" [formControl]="formGroup.controls.general.controls.nationality">
+        </div>
+        <div class="general-field">
+          <label class="left w-4">{{ "sheet.ars-magica.birthPlace" | translate }}</label>
+          <input class="w-8" [formControl]="formGroup.controls.general.controls.birthPlace">
+        </div>
+        <div class="general-field">
+          <label class="left w-4">{{ "sheet.ars-magica.religion" | translate }}</label>
+          <input class="w-8" [formControl]="formGroup.controls.general.controls.religion">
+        </div>
+        <div class="general-field">
+          <label class="left w-4">{{ "sheet.ars-magica.occupation" | translate }}</label>
+          <input class="w-8" [formControl]="formGroup.controls.general.controls.occupation">
+        </div>
+        <div class="flex-row flex gap-2">
+          <div class="general-field w-6">
+            <label class="left w-4">{{ "sheet.ars-magica.height" | translate }}</label>
+            <input class="w-8" [formControl]="formGroup.controls.general.controls.height">
+          </div>
+          <div class="general-field w-6">
+            <label class="left w-4">{{ "sheet.ars-magica.weight" | translate }}</label>
+            <input class="w-8" [formControl]="formGroup.controls.general.controls.weight">
+          </div>
+        </div>
+        <div class="flex-row flex gap-2">
+          <div class="general-field w-6">
+            <label class="left w-4">{{ "sheet.ars-magica.hair" | translate }}</label>
+            <input class="w-8" [formControl]="formGroup.controls.general.controls.hair">
+          </div>
+          <div class="general-field w-6">
+            <label class="left w-4">{{ "sheet.ars-magica.eyes" | translate }}</label>
+            <input class="w-8" [formControl]="formGroup.controls.general.controls.eyes">
+          </div>
+        </div>
+        <div class="flex-row flex gap-2">
+          <div class="general-field w-6">
+            <label class="left w-4">{{ "sheet.ars-magica.size" | translate }}</label>
+            <input class="w-8" [formControl]="formGroup.controls.general.controls.size">
+          </div>
+          <div class="general-field w-6">
+            <label class="left w-4">{{ "sheet.ars-magica.hand" | translate }}</label>
+            <input class="w-8" [formControl]="formGroup.controls.general.controls.hand">
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <div class="flex flex-row gap-2 align-items-stretch flex-1">
+      <section class="w-6">
+        <h1>{{"sheet.ars-magica.vertues_flaws" | translate}}</h1>
+      </section>
+      <section class="w-6">
+        <h1>{{"sheet.ars-magica.abilities" | translate}}</h1>
+      </section>
+
+
+  </div>
+</div>
