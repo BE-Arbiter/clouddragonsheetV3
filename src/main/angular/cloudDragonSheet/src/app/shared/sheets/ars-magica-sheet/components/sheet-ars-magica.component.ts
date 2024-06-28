@@ -4,6 +4,7 @@ import {ArsMagicaFormGroup, ArsMagicaSheet} from "../model/AM5-sheet.model";
 import {ArsMagicaSheetManager} from "../ars-magica.sheet";
 import {Sheet} from "../../../../core/model/sheet.model";
 import {FormGroup} from "@angular/forms";
+import {AM5Constant} from "../model/AM5-constants.model";
 
 @Component({
   selector: 'app-sheet-ars-magica',
@@ -89,4 +90,6 @@ export class SheetArsMagicaComponent implements OnInit, OnChanges {
   public removeAbilityAt(i:number){
     this.sheetManager.removeAbilityAt(this.formGroup,i);
   }
+
+  public Constants = AM5Constant;
 }

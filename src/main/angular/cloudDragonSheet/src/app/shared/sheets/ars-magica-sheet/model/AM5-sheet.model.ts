@@ -2,7 +2,7 @@ import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import {AM5GeneralData, AM5GeneralDataForm} from "./AM5-general.model";
 import {AM5Characteristics, AM5CharacteristicsForm} from "./AM5-characteristics.model";
 import {AM5Virtue, AM5VirtueForm} from "./AM5-virtue.model";
-import {AM5Configuration} from "./AM5-configuration.model";
+import {AM5Configuration, AM5ConfigurationForm} from "./AM5-configuration.model";
 import {AM5Ability, AM5AbilityForm} from "./AM5-ability.model";
 import {AM5Personality, AM5PersonalityForm} from "./AM5-personality.model";
 
@@ -40,6 +40,8 @@ export type ArsMagicaFormGroup = {
   virtues: FormArray<FormGroup<AM5VirtueForm>>,
   flaws: FormArray<FormGroup<AM5VirtueForm>>,
   virtueFlawBalance: FormControl<number>,
+
+  configuration: FormGroup<AM5ConfigurationForm>,
 
   abilities: FormArray<FormGroup<AM5AbilityForm>>;
 

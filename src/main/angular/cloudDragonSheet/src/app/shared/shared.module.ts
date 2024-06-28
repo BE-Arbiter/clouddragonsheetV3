@@ -35,6 +35,7 @@ import {
   AM5AbilityFgControlComponent
 } from "./sheets/ars-magica-sheet/components/ability-fg-control/ability-fg-control.component";
 import {InputNumberModule} from "primeng/inputnumber";
+import {PageSheetComponent} from "./components/page-sheet/page-sheet.component";
 
 const SHEETS : any[] = [
   SheetDebugComponent,
@@ -44,13 +45,15 @@ const SHEETS : any[] = [
 ]
 
 const DECLARATIONS : any[] = [
-  SheetsHandlerComponent,
   ValdemortDefaultComponent,
   ErrorPageComponent,
   LoginFormComponent,
   SubscribeFormComponent,
   SharedPictureComponent,
 
+  //Sheets Component
+  SheetsHandlerComponent,
+  PageSheetComponent,
   //Pipes
   UsernamePipe,
 ]

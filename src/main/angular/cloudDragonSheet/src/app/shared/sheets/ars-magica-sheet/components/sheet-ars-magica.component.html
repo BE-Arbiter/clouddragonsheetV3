@@ -1,36 +1,30 @@
 <!-- Intro Page -->
-<div class="page">
-  <div class="page-copyright">{{ 'common.copyright'|translate }}</div>
-  <div class="page-number"></div>
-  <div class="page-contents flex flex-column align-items-stretch gap-2" *ngIf="formGroup">
-    <div class="flex flex-row align-items-center justify-content-center mt-8 pt-4 mb-4">
-      <img alt="Ars Magica" src="../../../../assets/images/ars-magica/titre.png">
+<sheet-page [showContent]="!!formGroup">
+  <div class="flex flex-row align-items-center justify-content-center mt-8 pt-4 mb-4">
+    <img alt="Ars Magica" src="../../../../assets/images/ars-magica/titre.png">
+  </div>
+  <app-shared-picture [formControl]="formGroup.controls.characterPicture"></app-shared-picture>
+  <h1 class="flex flex-row justify-content-center align-items-center">
+    {{ "sheet.ars-magica.title" | translate }}
+  </h1>
+  <div class="flex flex-row gap-4 mt-8">
+    <div class="general-field w-4">
+      <label class="w-5">{{ "sheet.ars-magica.player" | translate }}</label>
+      <input class="w-7" [formControl]="formGroup.controls.playerName">
     </div>
-    <app-shared-picture [formControl]="formGroup.controls.characterPicture"></app-shared-picture>
-    <h1 class="flex flex-row justify-content-center align-items-center">
-      {{ "sheet.ars-magica.title" | translate }}
-    </h1>
-    <div class="flex flex-row gap-4 mt-8">
-      <div class="general-field w-4">
-        <label class="w-5">{{ "sheet.ars-magica.player" | translate }}</label>
-        <input class="w-7" [formControl]="formGroup.controls.playerName">
-      </div>
-      <div class="general-field w-4">
-        <label class="w-5">{{ "sheet.ars-magica.game" | translate }}</label>
-        <input class="w-7" [formControl]="formGroup.controls.gameName">
-      </div>
-      <div class="general-field w-4">
-        <label class="w-5">{{ "sheet.ars-magica.character" | translate }}</label>
-        <input class="w-7" [formControl]="formGroup.controls.characterName">
-      </div>
+    <div class="general-field w-4">
+      <label class="w-5">{{ "sheet.ars-magica.game" | translate }}</label>
+      <input class="w-7" [formControl]="formGroup.controls.gameName">
+    </div>
+    <div class="general-field w-4">
+      <label class="w-5">{{ "sheet.ars-magica.character" | translate }}</label>
+      <input class="w-7" [formControl]="formGroup.controls.characterName">
     </div>
   </div>
-</div>
-<!-- Intro First Page -->
-<div class="page">
-  <div class="page-copyright">{{ 'common.copyright'|translate }}</div>
-  <div class="page-number">1</div>
-  <div class="page-contents flex flex-column align-items-stretch gap-2" *ngIf="formGroup">
+</sheet-page>
+
+<!-- First page -->
+<sheet-page [showContent]="!!formGroup" pageNumber="1">
     <div class="flex flex-row gap-2">
       <div class="flex flex-column gap-1 w-6">
         <div class="flex flex-row field">
@@ -290,10 +284,10 @@
       <section class="w-6 justify-content-start">
         <h1>{{ "sheet.ars-magica.abilities" | translate }}</h1>
         <div class="flex flex-row gap-1">
-          <label class="w-2 center">{{"sheets.ars-magica.labels.xp" | translate}}</label>
-          <label class="w-5 left">{{"sheets.ars-magica.labels.label" | translate}}</label>
-          <label class="w-3 left">{{"sheets.ars-magica.labels.specialty" | translate}}</label>
-          <label class="w-2 center">{{"sheets.ars-magica.labels.value" | translate}}</label>
+          <label class="w-2 center">{{ "sheets.ars-magica.labels.xp" | translate }}</label>
+          <label class="w-5 left">{{ "sheets.ars-magica.labels.label" | translate }}</label>
+          <label class="w-3 left">{{ "sheets.ars-magica.labels.specialty" | translate }}</label>
+          <label class="w-2 center">{{ "sheets.ars-magica.labels.value" | translate }}</label>
           <div class="w-1 screen-only">
             <i class="pi pi-plus-circle" (click)="addAbility()"></i>
           </div>
@@ -304,4 +298,18 @@
       </section>
 
     </div>
-  </div>
+</sheet-page>
+<!-- Second page-->
+<sheet-page [showContent]="!!formGroup" pageNumber="2">
+</sheet-page>
+
+<!-- Second page-->
+<sheet-page [showContent]="!!formGroup" pageNumber="3">
+</sheet-page>
+
+<!-- Fourth Page -->
+<sheet-page [showContent]="!!formGroup" pageNumber="4"></sheet-page>
+
+<!-- Mage-1 Page -->
+<sheet-page [showContent]="!!formGroup" pageNumber="M1" *ngIf="formGroup?.value.configuration.characterType == Constants.CHARACTER_TYPE_MAGE">
+</sheet-page>

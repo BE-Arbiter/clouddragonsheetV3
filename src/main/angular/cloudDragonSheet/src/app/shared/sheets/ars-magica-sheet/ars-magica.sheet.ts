@@ -9,6 +9,8 @@ import {ArsMagicaFormGroup, ArsMagicaSheet} from "./model/AM5-sheet.model";
 import {AM5PersonalityForm} from "./model/AM5-personality.model";
 import {UserFull} from "../../../core/model/user.model";
 import {AuthService} from "../../../core/services/auth.service";
+import {AM5Configuration, AM5ConfigurationForm} from "./model/AM5-configuration.model";
+import {AM5Constant} from "./model/AM5-constants.model";
 
 @UntilDestroy()
 @Injectable({
@@ -19,7 +21,7 @@ export class ArsMagicaSheetManager implements OnInit {
   private currentUser: UserFull | null = null;
 
   public constructor(
-    private _fb: FormBuilder,
+    private fb: FormBuilder,
     private authService: AuthService,
   ) {
   }
@@ -45,10 +47,11 @@ export class ArsMagicaSheetManager implements OnInit {
       general: this.generalDataForm,
 
       characteristics: this.characteriticsForm,
+      configuration: this.configurationForm,
 
       virtues: this.fb.array<FormGroup<AM5VirtueForm>>([]),
       flaws: this.fb.array<FormGroup<AM5VirtueForm>>([]),
-      virtueFlawBalance: this.fb.control(0),
+      virtueFlawBalance: this.fb.control(null),
 
       abilities: this.fb.array<FormGroup<AM5AbilityForm>>([]),
       personalities: this.fb.array<FormGroup<AM5PersonalityForm>>([]),
@@ -93,15 +96,15 @@ export class ArsMagicaSheetManager implements OnInit {
   private get abilityForm(): FormGroup<AM5AbilityForm>{
     return this.fb.group<AM5AbilityForm>({
       name:this.fb.control(""),
-      value:this.fb.control(0),
-      experience:this.fb.control(0),
+      value:this.fb.control(null),
+      experience:this.fb.control(null),
       notes:this.fb.control(""),
       specialty:this.fb.control(""),
     })
   }
   private get virtueForm(): FormGroup<AM5VirtueForm>{
     return this.fb.group<AM5VirtueForm>({
-      cost: this.fb.control(0),
+      cost: this.fb.control(null),
       category:this.fb.control(""),
       name:this.fb.control(""),
       type:this.fb.control(""),
@@ -112,8 +115,8 @@ export class ArsMagicaSheetManager implements OnInit {
     return this.fb.group<AM5GeneralDataForm>({
       tribunal: this.fb.control(""),
       year: this.fb.control(""),
-      confidenceValue: this.fb.control(0),
-      confidencePoint: this.fb.control(0),
+      confidenceValue: this.fb.control(null),
+      confidencePoint: this.fb.control(null),
       birthName: this.fb.control(""),
       birthYear: this.fb.control(""),
       birthPlace: this.fb.control(""),
@@ -126,14 +129,14 @@ export class ArsMagicaSheetManager implements OnInit {
       hair: this.fb.control(""),
       eyes: this.fb.control(""),
       hand: this.fb.control(""),
-      size: this.fb.control(0)
+      size: this.fb.control(null)
     })
   }
 
   private get characteristicForm(): FormGroup<AM5CharacteristicForm> {
     return this.fb.group<AM5CharacteristicForm>({
       note: this.fb.control(""),
-      value: this.fb.control(0)
+      value: this.fb.control(null)
     });
   }
 
@@ -150,9 +153,19 @@ export class ArsMagicaSheetManager implements OnInit {
     });
   }
 
-  private get fb() {
-    return this._fb.nonNullable;
+  private get configurationForm(): FormGroup<AM5ConfigurationForm> {
+    return this.fb.group<AM5ConfigurationForm>({
+      alternateCast : this.fb.control(false),
+      characterType: this.fb.control(AM5Constant.CHARACTER_TYPE_GROG),
+      doCalculations: this.fb.control(false),
+      pictureBackground:this.fb.control(""),
+      pictureOverlay:this.fb.control(""),
+      pictureXOffset:this.fb.control(null),
+      pictureYOffset:this.fb.control(null),
+      pictureZoom:this.fb.control(false),
+    });
   }
+
 
 
 }

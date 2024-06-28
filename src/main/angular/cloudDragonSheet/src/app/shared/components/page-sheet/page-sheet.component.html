@@ -1,0 +1,7 @@
+<div class="page">
+  <div class="page-copyright">{{ 'common.copyright'|translate }}</div>
+  <div class="page-number">{{ pageNumber }}</div>
+  <div class="page-contents flex flex-column align-items-stretch gap-2" *ngIf="showContent">
+    <ng-content></ng-content>
+  </div>
+</div>
