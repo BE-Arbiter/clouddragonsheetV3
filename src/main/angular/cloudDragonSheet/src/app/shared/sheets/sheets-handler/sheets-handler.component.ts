@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {Sheet} from "../../../core/model/sheet.model";
 import {GamesEnum} from "../../../core/enums/games.enum";
 import {SheetsService} from "../../../core/services/sheets.service";
@@ -14,6 +14,8 @@ import {UiService} from "../../../core/services/ui.service";
 export class SheetsHandlerComponent implements OnInit{
   @Input()
   public sheetId! : number;
+
+  public onConfigure : EventEmitter<void> = new EventEmitter<void>();
 
   public sheet! : Sheet;
   public formGroupSubject : BehaviorSubject<FormGroup> =  new BehaviorSubject<FormGroup>(new FormGroup<any>({}));
@@ -46,6 +48,10 @@ export class SheetsHandlerComponent implements OnInit{
 
   public print():void{
     window.print();
+  }
+
+  public configure():void{
+    this.onConfigure.emit();
   }
 
   public gameEnums = GamesEnum;

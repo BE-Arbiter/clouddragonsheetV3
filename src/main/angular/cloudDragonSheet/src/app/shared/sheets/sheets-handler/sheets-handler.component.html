@@ -1,10 +1,11 @@
 <div class="h-full" style="position:relative">
   <div class="screen-only top-bar">
+    <button pButton class="p-button-white" (click)="configure()"><i class="pi pi-cog"></i></button>
     <button pButton class="p-button-white" (click)="save()"><i class="pi pi-save"></i></button>
     <button pButton class="p-button-white" (click)="print()"><i class="pi pi-print"></i></button>
-    <button pButton class="p-button-white"><i class="pi pi-share"></i></button>
+    <button pButton class="p-button-white"><i class="pi pi-share-alt"></i></button>
   </div>
-  <div *ngIf="sheet" class="overflow-scroll h-full pt-4 pb-4">
+  <div *ngIf="sheet" class="h-full">
     <app-sheet-debug *ngIf="sheet.game == gameEnums.DEBUG_SHEET" [formGroupSubject]="formGroupSubject"
                      [sheet]="sheet"></app-sheet-debug>
     <app-sheet-ars-magica *ngIf="sheet.game == gameEnums.ARS_MAGICA_5TH" [formGroupSubject]="formGroupSubject"

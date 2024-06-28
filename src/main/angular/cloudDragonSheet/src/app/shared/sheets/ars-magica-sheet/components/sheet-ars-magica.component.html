@@ -1,6 +1,7 @@
+<!-- Intro Page -->
 <div class="page">
   <div class="page-copyright">{{ 'common.copyright'|translate }}</div>
-  <div class="page-number">1</div>
+  <div class="page-number"></div>
   <div class="page-contents flex flex-column align-items-stretch gap-2" *ngIf="formGroup">
     <div class="flex flex-row align-items-center justify-content-center mt-8 pt-4 mb-4">
       <img alt="Ars Magica" src="../../../../assets/images/ars-magica/titre.png">
@@ -25,6 +26,7 @@
     </div>
   </div>
 </div>
+<!-- Intro First Page -->
 <div class="page">
   <div class="page-copyright">{{ 'common.copyright'|translate }}</div>
   <div class="page-number">1</div>
@@ -237,13 +239,58 @@
     </div>
 
     <div class="flex flex-row gap-2 align-items-stretch flex-1">
-      <section class="w-6">
-        <h1>{{"sheet.ars-magica.vertues_flaws" | translate}}</h1>
+      <section class="w-6 justify-content-start">
+        <h1>{{ "sheet.ars-magica.virtues_flaws" | translate }}</h1>
+        <div class="flex flex-row">
+          <h2 class="w-10">{{ "sheet.ars-magica.virtues" | translate }}</h2>
+          <div class="w-2 justify-content-end flex-row flex screen-only">
+            <button pButton class="p-button-white" (click)="addVirtue()"><i class="pi pi-plus-circle"></i></button>
+          </div>
+        </div>
+        <div class="flex flex-row gap-1">
+          <label class="w-5 left">
+            {{ "sheets.ars-magica.labels.label" | translate }}
+          </label>
+          <label class="w-3 center">
+            {{ "sheets.ars-magica.labels.category" | translate }}
+          </label>
+          <label class="w-3 center">
+            {{ "sheets.ars-magica.labels.type" | translate }}
+          </label>
+          <label class="w-1 center">
+            {{ "sheets.ars-magica.labels.cost" | translate }}
+          </label>
+          <div class="w-1 screen-only">
+          </div>
+        </div>
+        <AM5-virtue-control *ngFor="let virtuefg of formGroup.controls.virtues.controls, let i = index"
+                            (onDeleteVirtue)="removeVirtueAt(i) "
+                            [formGroup]="virtuefg"></AM5-virtue-control>
+        <div class="flex flex-row">
+          <h2 class="w-10">{{ "sheet.ars-magica.flaws" | translate }}</h2>
+          <div class="w-2 justify-content-end flex-row flex screen-only">
+            <button pButton class="p-button-white" (click)="addFlaw()"><i class="pi pi-plus-circle"></i></button>
+          </div>
+        </div>
+        <div class="flex flex-row gap-1">
+          <label class="w-7 left">
+            {{ "sheets.ars-magica.labels.label" | translate }}
+          </label>
+          <label class="w-4 center">
+            {{ "sheets.ars-magica.labels.type" | translate }}
+          </label>
+          <label class="w-1 center">
+            {{ "sheets.ars-magica.labels.cost" | translate }}
+          </label>
+        </div>
+        <AM5-virtue-control *ngFor="let flawfg of formGroup.controls.flaws.controls,let i = index"
+                            (onDeleteVirtue)="removeFlawAt(i) "
+                            [formGroup]="flawfg"></AM5-virtue-control>
       </section>
       <section class="w-6">
-        <h1>{{"sheet.ars-magica.abilities" | translate}}</h1>
+        <h1>{{ "sheet.ars-magica.abilities" | translate }}</h1>
       </section>
 
 
+    </div>
   </div>
-</div>

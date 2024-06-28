@@ -1,0 +1,9 @@
+<div class="flex flex-row mt-1 mb-1" *ngIf="formGroup">
+  <input class="w-5 left" [formControl]="formGroup.controls.name"/>
+  <input class="w-3 center" [formControl]="formGroup.controls.category"/>
+  <input class="w-3 center" [formControl]="formGroup.controls.type"/>
+  <input class="w-1 center" type="number" [formControl]="formGroup.controls.cost"/>
+  <div class="w-1 screen-only">
+    <i class="pi pi-minus-circle cursor-pointer" (click)="this.onDeleteVirtue.emit()"></i>
+  </div>
+</div>

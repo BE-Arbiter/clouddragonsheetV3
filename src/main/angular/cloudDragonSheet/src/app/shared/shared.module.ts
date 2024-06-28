@@ -27,11 +27,15 @@ import {SharedPictureComponent} from './components/shared-picture/shared-picture
 import {DragDropModule} from "primeng/dragdrop";
 import {FileUploadModule} from "primeng/fileupload";
 import {SheetDebugComponent} from "./sheets/debug-sheet/component/sheet-debug.component";
-import {SheetArsMagicaComponent} from "./sheets/ars-magica-sheet/component/sheet-ars-magica.component";
+import {SheetArsMagicaComponent} from "./sheets/ars-magica-sheet/components/sheet-ars-magica.component";
+import {
+  AM5VirtueFgControlComponent
+} from "./sheets/ars-magica-sheet/components/virtue_fg_control/virtue-fg-control.component";
 
 const SHEETS : any[] = [
   SheetDebugComponent,
   SheetArsMagicaComponent,
+  AM5VirtueFgControlComponent,
 ]
 
 const DECLARATIONS : any[] = [

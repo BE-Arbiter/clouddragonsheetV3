@@ -4,8 +4,8 @@ app-sheet-ars-magica {
     font-family: 'Macondo', cursive;
   }
 
-  .hr{
-    width:100%;
+  .hr {
+    width: 100%;
     border-bottom: 1px solid var(--accent1);
   }
 
@@ -23,6 +23,15 @@ app-sheet-ars-magica {
     background: none;
   }
 
+  input.right {
+    text-align: right;
+  }
+
+  input.left {
+    text-align: left;
+  }
+
+
   h1 {
     color: var(--text);
     width: 100%;
@@ -30,33 +39,42 @@ app-sheet-ars-magica {
     text-align: center;
   }
 
-  .general-field{
+  h2 {
+    color: var(--text);
+    font-size: 1.5em;
+  }
+
+  .general-field {
     display: flex;
     flex-direction: row;
     padding: .125rem;
 
-    .composite-input{
-      display:flex;
+    .composite-input {
+      display: flex;
       flex-direction: row;
-      input{
-        width:100%
+
+      input {
+        width: 100%
       }
     }
-    label{
-      text-align: right
+  }
+    label {
+      text-align: right;
     }
-    label.center{
+
+    label.center {
       text-align: center;
     }
-    label.left{
+
+    label.left {
       text-align: left;
     }
-  }
 
-  section{
-    display : flex;
+
+  section {
+    display: flex;
     flex-direction: column;
-    justify-content:space-between;
+    justify-content: space-between;
     margin-top: 0.75rem;
     border-bottom: 2px solid var(--accent1);
     padding-bottom: 0.75rem;

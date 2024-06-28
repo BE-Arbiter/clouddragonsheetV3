@@ -25,7 +25,8 @@ export class SheetArsMagicaComponent implements OnInit, OnChanges {
     this.formGroup = this.sheetManager.formGroup;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["sheet"]) {
@@ -35,7 +36,15 @@ export class SheetArsMagicaComponent implements OnInit, OnChanges {
         let data = JSON.parse(sheet.data) as ArsMagicaSheet;
         data.characterName = !data.characterName ? sheet.characterName : data.characterName;
         data.playerName = (!data.playerName && this.formGroup.value.playerName) ? this.formGroup.value.playerName : data.playerName;
-          this.formGroup.patchValue(data);
+        this.formGroup.controls.virtues.clear();
+        this.formGroup.controls.flaws.clear();
+        for(let i = 0; i < data.virtues.length ; i++){
+          this.addVirtue();
+        }
+        for(let i = 0; i < data.flaws.length ; i++){
+          this.addFlaw();
+        }
+        this.formGroup.patchValue(data);
         if (this.formGroupSubject) {
           this.formGroupSubject.next(this.formGroup);
         }
@@ -49,5 +58,21 @@ export class SheetArsMagicaComponent implements OnInit, OnChanges {
         }
       }
     }
+  }
+
+  public addVirtue() {
+    this.sheetManager.addVirtue(this.formGroup);
+  }
+
+  public removeVirtueAt(i:number){
+    this.sheetManager.removeVirtueAt(this.formGroup,i);
+  }
+
+  public addFlaw() {
+    this.sheetManager.addFlaw(this.formGroup);
+  }
+
+  public removeFlawAt(i:number){
+    this.sheetManager.removeFlawAt(this.formGroup,i);
   }
 }

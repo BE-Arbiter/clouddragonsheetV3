@@ -1,0 +1,21 @@
+.registered-main-content{
+  @media screen {
+    height: calc(100vh - 4.5rem);
+  }
+  display:flex;
+  flex-direction:row;
+}
+
+.router-outlet-content{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  @media screen {
+    overflow: scroll;
+  }
+  @media print {
+    overflow: visible;
+  }
+  flex: 1;
+}
