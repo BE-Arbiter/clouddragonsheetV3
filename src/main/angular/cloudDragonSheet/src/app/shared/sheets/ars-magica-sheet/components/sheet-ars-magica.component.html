@@ -287,10 +287,21 @@
                             (onDeleteVirtue)="removeFlawAt(i) "
                             [formGroup]="flawfg"></AM5-virtue-control>
       </section>
-      <section class="w-6">
+      <section class="w-6 justify-content-start">
         <h1>{{ "sheet.ars-magica.abilities" | translate }}</h1>
+        <div class="flex flex-row gap-1">
+          <label class="w-2 center">{{"sheets.ars-magica.labels.xp" | translate}}</label>
+          <label class="w-5 left">{{"sheets.ars-magica.labels.label" | translate}}</label>
+          <label class="w-3 left">{{"sheets.ars-magica.labels.specialty" | translate}}</label>
+          <label class="w-2 center">{{"sheets.ars-magica.labels.value" | translate}}</label>
+          <div class="w-1 screen-only">
+            <i class="pi pi-plus-circle" (click)="addAbility()"></i>
+          </div>
+        </div>
+        <AM5-ability-control *ngFor="let abilityfg of formGroup.controls.abilities.controls,let i = index"
+                             (onDeleteAbility)="removeAbilityAt(i)"
+                             [formGroup]="abilityfg"></AM5-ability-control>
       </section>
-
 
     </div>
   </div>

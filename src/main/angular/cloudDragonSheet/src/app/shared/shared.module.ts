@@ -30,12 +30,17 @@ import {SheetDebugComponent} from "./sheets/debug-sheet/component/sheet-debug.co
 import {SheetArsMagicaComponent} from "./sheets/ars-magica-sheet/components/sheet-ars-magica.component";
 import {
   AM5VirtueFgControlComponent
-} from "./sheets/ars-magica-sheet/components/virtue_fg_control/virtue-fg-control.component";
+} from "./sheets/ars-magica-sheet/components/virtue-fg-control/virtue-fg-control.component";
+import {
+  AM5AbilityFgControlComponent
+} from "./sheets/ars-magica-sheet/components/ability-fg-control/ability-fg-control.component";
+import {InputNumberModule} from "primeng/inputnumber";
 
 const SHEETS : any[] = [
   SheetDebugComponent,
   SheetArsMagicaComponent,
   AM5VirtueFgControlComponent,
+  AM5AbilityFgControlComponent,
 ]
 
 const DECLARATIONS : any[] = [
@@ -63,6 +68,7 @@ const MODULES : any[] = [
   ProgressBarModule,
   DialogModule,
   InputTextModule,
+  InputNumberModule,
   CardModule,
   TableModule,
   BadgeModule,

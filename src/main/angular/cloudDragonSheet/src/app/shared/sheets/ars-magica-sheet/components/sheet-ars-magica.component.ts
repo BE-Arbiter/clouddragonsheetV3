@@ -15,6 +15,9 @@ export class SheetArsMagicaComponent implements OnInit, OnChanges {
   public sheet!: Sheet;
 
   @Input()
+  public readonly : boolean = true;
+
+  @Input()
   public formGroupSubject!: BehaviorSubject<FormGroup>;
 
   public formGroup!: FormGroup<ArsMagicaFormGroup>;
@@ -38,11 +41,15 @@ export class SheetArsMagicaComponent implements OnInit, OnChanges {
         data.playerName = (!data.playerName && this.formGroup.value.playerName) ? this.formGroup.value.playerName : data.playerName;
         this.formGroup.controls.virtues.clear();
         this.formGroup.controls.flaws.clear();
+        this.formGroup.controls.abilities.clear();
         for(let i = 0; i < data.virtues.length ; i++){
           this.addVirtue();
         }
         for(let i = 0; i < data.flaws.length ; i++){
           this.addFlaw();
+        }
+        for(let i = 0; i < data.abilities.length ; i++){
+          this.addAbility();
         }
         this.formGroup.patchValue(data);
         if (this.formGroupSubject) {
@@ -74,5 +81,12 @@ export class SheetArsMagicaComponent implements OnInit, OnChanges {
 
   public removeFlawAt(i:number){
     this.sheetManager.removeFlawAt(this.formGroup,i);
+  }
+  public addAbility() {
+    this.sheetManager.addAbility(this.formGroup);
+  }
+
+  public removeAbilityAt(i:number){
+    this.sheetManager.removeAbilityAt(this.formGroup,i);
   }
 }

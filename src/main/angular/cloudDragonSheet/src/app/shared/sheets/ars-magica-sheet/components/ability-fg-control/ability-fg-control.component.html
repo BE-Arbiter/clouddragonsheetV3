@@ -1,0 +1,13 @@
+<div class="general-field " *ngIf="formGroup">
+  <div class="w-2 composite-input">
+      [<p-inputNumber class="w-12 center" [formControl]="formGroup.controls.experience"/>]
+  </div>
+  <input class="w-5 left" [formControl]="formGroup.controls.name"/>
+  <div class="w-3 composite-input">
+    [<input class="w-12 left" [formControl]="formGroup.controls.specialty"/>]
+  </div>
+  <p-inputNumber class="w-2 center" [formControl]="formGroup.controls.value"/>
+  <div class="w-1 screen-only">
+    <i class="pi pi-minus-circle cursor-pointer" (click)="deleteAbility()"></i>
+  </div>
+</div>
